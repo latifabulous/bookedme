@@ -3,27 +3,44 @@ package com.example.booked_me.presentation.profile
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
-import com.bumptech.glide.Glide
+import android.widget.Toast
 import com.example.booked_me.R
-import com.example.booked_me.data.User
-import com.example.booked_me.databinding.ActivitySettingProfileBinding
-import com.example.booked_me.utils.Preference
-import com.google.firebase.database.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import de.hdodenhof.circleimageview.CircleImageView
+import java.io.ByteArrayOutputStream
 import java.util.*
+import kotlin.collections.HashMap
 
 class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var userProfilePict : CircleImageView
     private lateinit var userDOF : TextView
-    private lateinit var binding : ActivitySettingProfileBinding
-    private lateinit var database : DatabaseReference
-    private lateinit var preference : Preference
+
+    private lateinit var userName        : EditText
+    private lateinit var userEmail       : EditText
+    private lateinit var userPhoneNum    : EditText
+    private lateinit var userStore       : EditText
+    private lateinit var userAddress     : EditText
+
+    private lateinit var btnSaved        : Button
+
+    private lateinit var imageUri        : Uri
+
     val REQUEST_CODE = 100
+
+    lateinit var storage : StorageReference
 
     val calendar = Calendar.getInstance()
     val year = calendar.get((Calendar.YEAR))
@@ -32,56 +49,25 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySettingProfileBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        preference = Preference(this)
-        database = FirebaseDatabase.getInstance().getReference("user")
+        setContentView(R.layout.activity_setting_profile)
 
         userProfilePict = findViewById(R.id.img_user_pp)
         userDOF = findViewById(R.id.tv_user_dof)
 
+        userName        = findViewById(R.id.et_user_name)
+        userEmail       = findViewById(R.id.et_user_email)
+        userPhoneNum    = findViewById(R.id.et_user_phone)
+        userStore       = findViewById(R.id.et_user_store)
+        userAddress     = findViewById(R.id.et_user_address)
+
+        btnSaved        = findViewById(R.id.btn_log_in)
+
         userProfilePict.setOnClickListener(this)
         userDOF.setOnClickListener(this)
 
-        getData()
-    }
 
-    private fun getData() {
-        var username = preference.getValue("username")
-        database.child(username.toString()).addValueEventListener( object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val user = snapshot.getValue(User::class.java)
+        storage = FirebaseStorage.getInstance().reference.child("profileImg/")
 
-                with(binding){
-                    Glide.with(this@SettingProfileActivity)
-                            .load(user?.photo)
-                            .circleCrop()
-                            .into(imgUserPp)
-
-                    etUserName.setText(user?.username.toString())
-                    etUserAddress.setText(user?.address.toString())
-                    etUserEmail.setText(user?.email.toString())
-                    etUserPhone.setText(user?.phone.toString())
-                    etUserStore.setText(user?.store.toString())
-                    tvUserDof.text = user?.date.toString()
-                    etUserStore.setText(user?.store.toString())
-
-                    if (rbUserFemale.text == user?.gender){
-                        rbUserFemale.isChecked
-                    } else {
-                        rbUserMale.isChecked
-                    }
-
-                    
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
     }
 
     override fun onClick(v: View?) {
@@ -98,13 +84,35 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
 
                 dpd.show()
             }
+
+
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE){
-            userProfilePict.setImageURI(data?.data)
+
+
+            val imageData = data!!.getData()
+            val imageName:StorageReference = storage.child("image" + imageData!!.getLastPathSegment())
+
+
+            imageName.putFile(imageData).addOnSuccessListener {
+                userProfilePict.setImageURI(data?.data)
+                imageName.getDownloadUrl().addOnSuccessListener { uri ->
+                    val databaseReference: DatabaseReference =
+                        FirebaseDatabase.getInstance().getReferenceFromUrl("https://booked-me-default-rtdb.firebaseio.com/").child("profilImg")
+                    val hashMap: HashMap<String, String> = HashMap()
+                    hashMap.put("imageUrl", uri.toString())
+                    databaseReference.setValue(hashMap)
+                    Toast.makeText(this,"Profile Updated", Toast.LENGTH_SHORT).show()
+
+
+                }
+            }
+
         }
     }
+
 }
