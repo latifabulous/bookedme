@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="15dp"
+        app:cardElevation="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/CardMargin"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:id="@+id/img_book_cover"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="20dp"
+                tools:src="@tools:sample/avatars" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/img_book_cover"
+                android:layout_toRightOf="@id/img_book_cover"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="213dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_book_title"
+                            style="@style/Font"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="8dp"
+                            android:fontFamily="@font/playfair_display_bold"
+                            android:textColor="@color/black_s5"
+                            android:textSize="14sp"
+                            tools:text="@string/nama" />
+
+                        <TextView
+                            android:id="@+id/tv_book_author"
+                            style="@style/Font"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/poppins_medium"
+                            android:maxLines="2"
+                            android:textColor="@color/grey_s2"
+                            android:textSize="12sp"
+                            tools:text="@string/detail" />
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/btn_sign_in"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:backgroundTint="@color/green_1"
+                        android:src="@drawable/ic_bookmark_selector"
+                        android:background="@drawable/btn_round"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_book_address"
+                        style="@style/Font"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textColor="@color/black_s5"
+                        android:textSize="10sp"
+                        tools:text="@string/nama" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_book_price"
+                        style="@style/Font"
+                        android:gravity="right"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:textSize="14sp"
+                        android:textColor="@color/green_1"
+                        tools:text="Rp.5.000" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

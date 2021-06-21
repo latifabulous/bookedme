@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".order.InProgressFragment">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:padding="16dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="56dp"
+                android:layout_height="72dp"
+                app:cardCornerRadius="15dp">
+
+                <ImageView
+                    android:id="@+id/img_book_cover"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/jw"
+                    tools:ignore="ContentDescription" />
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp">
+                <TextView
+                    android:id="@+id/tv_book_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Latifabulous"
+                    android:textSize="14sp"
+                    android:textColor="@color/brown_5"
+                    android:fontFamily="@font/playfair_display_bold"
+                    android:gravity="center"/>
+                <RatingBar
+                    android:id="@+id/rb_book_rating"
+                    style="@android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:rating="4.5"
+                    android:stepSize="0.5"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="5dp"
+                    android:scaleX="0.4"
+                    android:scaleY="0.4"
+                    android:isIndicator="false"
+                    android:progressTint="#F1C644"
+                    android:secondaryProgressTint="#F1C644"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="-20dp">
+
+                    <ImageView
+                        android:id="@+id/minus_sum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_minus" />
+
+                    <TextView
+                        android:id="@+id/sum_book"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="1"
+                        android:textColor="@color/brown_2" />
+
+                    <ImageView
+                        android:id="@+id/add_sum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_plus" />
+
+                    <TextView
+                        android:id="@+id/tv_user_total_pay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Rp. 5000"
+                        android:textSize="14sp"
+                        android:gravity="right"
+                        android:textColor="@color/green_1"
+                        android:fontFamily="@font/poppins_semibold"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <include
+        android:id="@+id/bottom_sheet"
+        layout="@layout/bottom_sheet" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
