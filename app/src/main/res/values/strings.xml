@@ -1,0 +1,70 @@
+<resources>
+    <string name="app_name">BookedMe</string>
+    <string name="adopt">Adopt</string>
+    <string name="me">Me</string>
+    <string name="c1">Sayang anak adopsi \nkucing persia cepad</string>
+    <string name="c2">Di bulan puasa diskon \nadopsi hewan 10%</string>
+
+    <string name="browser">Explore</string>
+    <string name="nama_kucing">Nama Kucing</string>
+    <string name="detail">Detail</string>
+    <string name="list">List</string>
+    <string name="grid">Grid</string>
+    <string name="card">Card</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="kucing">Kucing</string>
+    <string name="anjing">Anjing</string>
+    <string name="ikan">Ikan</string>
+    <string name="rek">Recomendation</string>
+    <string name="nama">Nama</string>
+    <string name="nil">Nur Izza Latifah</string>
+    <string name="desc">Description</string>
+    <string name="sign_in">Sign In</string>
+    <string name="signup">Let\'s sign you in.</string>
+    <string name="signup2">Welcome back. \nYou\'ve be missed!</string>
+    <string name="uname">Username</string>
+    <string name="pass">Password</string>
+    <string name="email">Email</string>
+    <string name="don">Don\'t have an account?</string>
+    <string name="regis">Register</string>
+    <string name="signin">Sign In</string>
+    <string name="be_happy">BE HAPPY</string>
+    <string name="pemilik">Owner</string>
+    <string name="we_re_so_sorry">We\'re so sorry.</string>
+    <string name="under_construction">Under Construction</string>
+    <string name="share">share</string>
+    <string name="favorite">fav</string>
+    <string name="email_un">bae.latifa@gmail.com</string>
+    <string name="slogan">What book you want rent today?</string>
+    <string name="for_you">For You</string>
+    <string name="explore">Explore</string>
+    <string name="see_all">See all</string>
+    <string name="newest">Newest</string>
+    <string name="rating">Rating</string>
+    <string name="numpages">Number of Pages</string>
+    <string name="lang">Language</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+    <string name="education">education</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="login_details">Login with your data that you entered during registration</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="get_started">Get Started</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="log_in">Log In</string>
+    <string name="tnc">I agree to the Terms of Service and Privacy Policy</string>
+    <string name="signup_fb">Sign up with facebook</string>
+    <string name="signup_google">Sign up with Google</string>
+
+    <string name="in_progress">In Progress</string>
+    <string name="past_order">Past Order</string>
+
+    <string name="owner">Owner</string>
+    <string name="review">Review</string>
+    <string name="summary">Summary</string>
+    <string name="alamat">Jl. Raya Tanjung, Gunungsari LOMBOK BARAT, 83351</string>
+    <string name="my_feed">My Feed</string>
+    <string name="my_order">My Order</string>
+
+</resources>

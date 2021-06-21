@@ -1,0 +1,16 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Bookedme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/green_1</item>
+        <item name="colorPrimaryVariant">@color/green_variant</item>
+        <item name="colorOnPrimary">@color/white_s6</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/brown_2</item>
+        <item name="colorSecondaryVariant">@color/brown_3</item>
+        <item name="colorOnSecondary">@color/black_s5</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+</resources>
