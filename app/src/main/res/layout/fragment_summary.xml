@@ -6,7 +6,7 @@
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
     android:orientation="vertical"
-    tools:context=".tab_fragments.SummaryFragment">
+    tools:context=".presentation.tab_fragments.SummaryFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
