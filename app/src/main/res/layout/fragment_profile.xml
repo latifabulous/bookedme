@@ -23,6 +23,7 @@
             android:elevation="4dp" />
 
         <TextView
+            android:id="@+id/tv_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -33,6 +34,7 @@
             android:fontFamily="@font/poppins_semibold"/>
 
         <TextView
+            android:id="@+id/tv_store"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="latifabulous"

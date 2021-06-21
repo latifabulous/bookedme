@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
 
-    tools:context=".tab_fragments.OwnerFragment">
+    tools:context=".presentation.tab_fragments.OwnerFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
