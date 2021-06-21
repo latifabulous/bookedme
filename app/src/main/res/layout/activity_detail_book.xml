@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DetailBookActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="400dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:layout_marginTop="-50dp"
+                android:layout_marginBottom="-120dp"
+                android:src="@drawable/selena_gramedia" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="420dp"
+                android:layout_marginLeft="-10dp"
+                android:layout_marginTop="-10dp"
+                android:layout_marginRight="-10dp"
+                android:layout_marginBottom="-10dp"
+                android:background="@drawable/bg_blur"
+                android:orientation="vertical"
+                android:scaleType="fitXY">
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_gravity="center">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="150dp"
+                    android:layout_height="210dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="4dp">
+
+                    <ImageView
+                        android:id="@+id/img_book_cover"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/jw"
+                        tools:ignore="ContentDescription" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:gravity="center"
+                    android:id="@+id/tv_book_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Laut Berbagi"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/playfair_display_bold"
+                    android:textColor="@color/white_s6"
+                    android:textSize="22sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_book_author"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Leila S. Chudori"
+                    android:textColor="@color/white_s6"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="-45dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:padding="16dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:text="@string/rating"
+                        android:textColor="@color/grey_s1"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_book_Rating"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:text="5"
+                        android:textColor="@color/black_s5"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="40dp"
+                    android:paddingLeft="40dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/numpages"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textColor="@color/grey_s1"
+                        android:textSize="12sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_book_numpages"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="120 Pages"
+                        android:textColor="@color/black_s5"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lang"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textColor="@color/grey_s1"
+                        android:textSize="12sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_book_lang"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Id"
+                        android:textColor="@color/black_s5"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                app:tabIndicatorHeight="3dp"
+                app:tabSelectedTextColor="@color/black_s5"
+                app:tabTextColor="@color/grey_s2"
+                app:tabTextAppearance="@style/TabLayout"
+                />
+
+<!--            app:tabMode="fixed"-->
+<!--            app:tabGravity="fill"-->
+
+            <!--        android:background="@color/white_s6"-->
+            <!--        app:tabBackground="@color/white_s6"-->
+
+            <!--        app:tabRippleColor="@color/brown_2"-->
+            <!--        app:tabInlineLabel="true"-->
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".tab_fragments.ReviewFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="75dp"
+            android:gravity="left">
+
+            <TextView
+                android:id="@+id/tv_book_avg_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:text="4.5"
+                android:alpha="0.8"
+                android:textColor="@color/black_s5"
+                android:textSize="40sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RatingBar
+                    android:id="@+id/rb_book_avg_rating"
+                    style="@android:attr/ratingBarStyleSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:numStars="5"
+                    android:rating="4.5"
+                    android:stepSize="0.5"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="5dp"
+                    android:scaleX="0.5"
+                    android:scaleY="0.5"
+                    android:isIndicator="false"
+                    android:progressTint="#F1C644"
+                    android:layout_marginLeft="8dp"
+                    android:secondaryProgressTint="#F1C644"/>
+
+                <TextView
+                    android:id="@+id/tv_book_rating"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="dari total 5"
+                    android:layout_marginLeft="8dp"
+                    android:alpha="0.8"
+                    android:layout_marginTop="-25dp"
+                    android:textColor="@color/black_s5"
+                    android:textSize="10sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:gravity="left">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:src="@drawable/jw"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Nunikyuni"
+                    android:layout_marginLeft="8dp"
+                    android:alpha="0.8"
+                    android:textColor="@color/black_s5"
+                    android:textSize="14sp"/>
+
+                <RatingBar
+                    android:id="@+id/rb_book_rating"
+                    style="@android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:numStars="5"
+                    android:rating="4.5"
+                    android:stepSize="0.5"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="5dp"
+                    android:scaleX="0.4"
+                    android:scaleY="0.4"
+                    android:isIndicator="false"
+                    android:progressTint="#F1C644"
+                    android:layout_marginLeft="8dp"
+                    android:secondaryProgressTint="#F1C644"/>
+
+                <TextView
+                    android:id="@+id/tv_book_Rating"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="-25dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/lorem"
+                    android:textColor="@color/grey_s1"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:gravity="left">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:src="@drawable/jw"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Nunikyuni"
+                    android:layout_marginLeft="8dp"
+                    android:alpha="0.8"
+                    android:textColor="@color/black_s5"
+                    android:textSize="14sp"/>
+
+                <RatingBar
+                    style="@android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:numStars="5"
+                    android:rating="4.5"
+                    android:stepSize="0.5"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="5dp"
+                    android:scaleX="0.4"
+                    android:scaleY="0.4"
+                    android:isIndicator="false"
+                    android:progressTint="#F1C644"
+                    android:layout_marginLeft="8dp"
+                    android:secondaryProgressTint="#F1C644"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="-25dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/lorem"
+                    android:textColor="@color/grey_s1"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>
