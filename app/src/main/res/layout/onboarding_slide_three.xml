@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_onboard_three"
+    android:layout_marginTop="-60dp"
+    android:layout_marginBottom="-90dp"
+    android:layout_marginRight="-20dp"
+    android:layout_marginLeft="-20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-75dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="70dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_onboard_three" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:fontFamily="@font/playfair_display_bold"
+            android:text="Explore a Book"
+            android:textColor="@color/brown_3"
+            android:textSize="36sp"/>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="363dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="40dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Use this notebook to write, doodle, hand letter, or sketch your favorite quotes. "
+            android:textColor="@color/brown_3"/>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="88dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/btn_brown_4"
+            android:text="Get Started"
+            android:textAllCaps="false"
+            android:layout_gravity="center"
+            android:onClick="nextPage"
+            android:backgroundTint="@color/brown_3"
+            android:textColor="@color/brown_5"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_line_obs_2" />
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:src="@drawable/ic_line_obs_small" />
+        </FrameLayout>
+
+
+    </LinearLayout>
+</FrameLayout>
