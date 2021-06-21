@@ -64,6 +64,7 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
 
         userProfilePict.setOnClickListener(this)
         userDOF.setOnClickListener(this)
+        btnSaved.setOnClickListener(this)
 
 
         storage = FirebaseStorage.getInstance().reference.child("profileImg/")
@@ -84,6 +85,12 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
 
                 dpd.show()
             }
+
+            R.id.btn_log_in-> {
+                
+            }
+
+
 
 
         }
