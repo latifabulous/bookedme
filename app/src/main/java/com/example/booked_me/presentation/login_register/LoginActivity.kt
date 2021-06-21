@@ -13,6 +13,7 @@ import com.example.booked_me.R
 import com.example.booked_me.data.User
 import com.example.booked_me.databinding.ActivityLoginBinding
 import com.example.booked_me.presentation.MainActivity
+import com.example.booked_me.utils.Preference
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -33,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var firebase: DatabaseReference
     private lateinit var googleSignInClient : GoogleSignInClient
+    private lateinit var preferences : Preference
 
     private lateinit var auth: FirebaseAuth
 // ...
@@ -44,6 +46,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        preferences = Preference(this)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -92,6 +96,8 @@ class LoginActivity : AppCompatActivity() {
                 if (user == null){
                     Toast.makeText(this@LoginActivity, "User Not Found", Toast.LENGTH_SHORT).show()
                 } else {
+
+                    preferences.setValue("username", user.username.toString())
 
                     Log.d("LoginActivity", user.toString())
                     if (username == user.username && password == user.password){
@@ -144,8 +150,14 @@ class LoginActivity : AppCompatActivity() {
                     user.username = task.result?.user?.displayName.toString()
                     user.password = ""
                     user.photo = task.result?.user?.photoUrl.toString()
+                    user.address = ""
+                    user.store = ""
+                    user.gender = ""
+                    user.phone = ""
+                    user.date = ""
 
                     val username = task.result?.user?.displayName.toString()
+                    preferences.setValue("username", username)
 
                     firebase.child(username).setValue(user)
 

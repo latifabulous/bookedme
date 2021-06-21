@@ -12,13 +12,17 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.LinearLayout
+import com.bumptech.glide.Glide
 import com.example.booked_me.R
+import com.example.booked_me.data.User
+import com.example.booked_me.databinding.FragmentProfileBinding
 import com.example.booked_me.presentation.login_register.LoginActivity
 import com.example.booked_me.presentation.order.OrderActivity
 import com.example.booked_me.presentation.profile.SettingProfileActivity
+import com.example.booked_me.utils.Preference
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 
 class ProfileFragment : Fragment() {
@@ -34,16 +38,24 @@ class ProfileFragment : Fragment() {
 
     private lateinit var btnLogout : LinearLayout
 
+    private lateinit var binding : FragmentProfileBinding
+    private lateinit var database : DatabaseReference
+    private lateinit var pref : Preference
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        pref = Preference(requireContext())
+        database = FirebaseDatabase.getInstance().getReference("user")
 
         btnLogout = view.findViewById(R.id.btn_logout)
         bottomSheet = view.findViewById(R.id.bottom_sheet)
@@ -54,6 +66,8 @@ class ProfileFragment : Fragment() {
         llFeed = view.findViewById(R.id.ll_myfeed)
         llOrder = view.findViewById(R.id.ll_order)
         llSetting = view.findViewById(R.id.ll_setting)
+
+        getData()
 
         btnLogout.setOnClickListener {
             Firebase.auth.signOut()
@@ -114,6 +128,30 @@ class ProfileFragment : Fragment() {
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+
+        })
+    }
+
+    private fun getData() {
+        val username = pref.getValue("username")
+        database.child(username.toString()).addValueEventListener( object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val user = snapshot.getValue(User::class.java)
+
+                with(binding){
+                    Glide.with(requireContext())
+                            .load(user?.photo)
+                            .circleCrop()
+                            .into(imgUserPp)
+
+                    tvStore.setText(user?.store)
+                    tvUsername.setText(user?.username)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
 
         })
     }

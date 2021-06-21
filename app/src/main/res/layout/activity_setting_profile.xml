@@ -205,7 +205,6 @@
                 android:layout_height="wrap_content"
                 android:text="Male"
                 android:alpha=".8"
-
                 android:layout_weight=".5"
                 android:background="@drawable/bg_input"
                 android:padding="16dp"
