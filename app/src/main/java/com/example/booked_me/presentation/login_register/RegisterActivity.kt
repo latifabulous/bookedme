@@ -28,6 +28,16 @@ class RegisterActivity : AppCompatActivity() {
         val database = FirebaseDatabase.getInstance()
         firebase = database.getReference("user")
 
+        binding.cbPolicy.setOnClickListener{
+            if (binding.cbPolicy.isChecked){
+                binding.btnLogIn.visibility = View.VISIBLE
+                binding.btnLogIn.isEnabled = true
+            } else {
+                binding.btnLogIn.visibility = View.INVISIBLE
+                binding.btnLogIn.isEnabled = false
+            }
+        }
+
         binding.btnLogIn.setOnClickListener {
             init()
         }

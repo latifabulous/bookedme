@@ -181,12 +181,14 @@
             android:layout_marginBottom="15dp"/>
 
         <CheckBox
+            android:id="@+id/cb_policy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:buttonTint="@color/grey_s1"
             android:fontFamily="@font/poppins_medium"
             android:textColor="@color/grey_s1"
+
             android:text="@string/tnc"/>
 <!--        <TextView-->
 <!--            android:layout_width="match_parent"-->
@@ -205,6 +207,8 @@
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/poppins_semibold"
             android:height="56dp"
+            android:enabled="false"
+            android:visibility="invisible"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:textAllCaps="false"

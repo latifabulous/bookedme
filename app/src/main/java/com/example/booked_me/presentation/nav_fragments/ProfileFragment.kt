@@ -4,6 +4,7 @@ package com.example.booked_me.presentation.nav_fragments
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +13,13 @@ import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.example.booked_me.R
+import com.example.booked_me.presentation.login_register.LoginActivity
 import com.example.booked_me.presentation.order.OrderActivity
 import com.example.booked_me.presentation.profile.SettingProfileActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class ProfileFragment : Fragment() {
 
@@ -27,10 +32,7 @@ class ProfileFragment : Fragment() {
     private lateinit var llFeed: LinearLayout
     private lateinit var llSetting: LinearLayout
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private lateinit var btnLogout : LinearLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +45,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        btnLogout = view.findViewById(R.id.btn_logout)
         bottomSheet = view.findViewById(R.id.bottom_sheet)
         gestureLayout = view.findViewById(R.id.gesture_layout)
         bottomSheetArrow = view.findViewById(R.id.bottom_sheet_arrow)
@@ -51,6 +54,13 @@ class ProfileFragment : Fragment() {
         llFeed = view.findViewById(R.id.ll_myfeed)
         llOrder = view.findViewById(R.id.ll_order)
         llSetting = view.findViewById(R.id.ll_setting)
+
+        btnLogout.setOnClickListener {
+            Firebase.auth.signOut()
+            activity?.finish()
+            view.context.startActivity(Intent(view.context, LoginActivity::class.java))
+            Log.d("ProfileFragment", "Logout Success")
+        }
 
         llOrder.setOnClickListener {
             val orderIntent = Intent(activity, OrderActivity::class.java)

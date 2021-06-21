@@ -26,7 +26,7 @@ import com.google.firebase.ktx.Firebase
 class LoginActivity : AppCompatActivity() {
 
     companion object{
-        const val RC_SIGN_IN = 100
+        const val RC_SIGN_IN = 9001
         private var TAG = LoginActivity::class.java.simpleName
     }
 
@@ -46,6 +46,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
 
@@ -138,6 +139,18 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    val user = User()
+                    user.email = task.result?.user?.email.toString()
+                    user.username = task.result?.user?.displayName.toString()
+                    user.password = ""
+                    user.photo = task.result?.user?.photoUrl.toString()
+
+                    val username = task.result?.user?.displayName.toString()
+
+                    firebase.child(username).setValue(user)
+
+                    finish()
+                    startActivity(Intent(this, MainActivity::class.java))
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
                 } else {
