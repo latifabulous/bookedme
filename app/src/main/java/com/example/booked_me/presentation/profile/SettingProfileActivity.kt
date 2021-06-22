@@ -7,15 +7,19 @@ import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.booked_me.R
+import com.example.booked_me.data.User
+import com.example.booked_me.databinding.ActivitySettingProfileBinding
+import com.example.booked_me.utils.Preference
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import de.hdodenhof.circleimageview.CircleImageView
@@ -41,6 +45,9 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
     val REQUEST_CODE = 100
 
     lateinit var storage : StorageReference
+    private lateinit var binding : ActivitySettingProfileBinding
+    private lateinit var databaseReference: DatabaseReference
+    private lateinit var preference : Preference
 
     val calendar = Calendar.getInstance()
     val year = calendar.get((Calendar.YEAR))
@@ -49,8 +56,10 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_setting_profile)
+        binding = ActivitySettingProfileBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
+        preference = Preference(this)
         userProfilePict = findViewById(R.id.img_user_pp)
         userDOF = findViewById(R.id.tv_user_dof)
 
@@ -65,12 +74,102 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
 
         userProfilePict.setOnClickListener(this)
         userDOF.setOnClickListener(this)
-        btnSaved.setOnClickListener(this)
-        btnBack.setOnClickListener(this)
 
-
+        databaseReference = FirebaseDatabase.getInstance().getReference("user")
         storage = FirebaseStorage.getInstance().reference.child("profileImg/")
 
+        readData()
+
+        binding.btnLogIn.setOnClickListener {
+            updateData()
+        }
+    }
+
+    private fun readData(){
+        databaseReference.child(preference.getValue("username").toString()).addValueEventListener(
+            object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val user = snapshot.getValue(User::class.java)
+
+                    with(binding){
+                        etUserName.setText(user?.username)
+                        etUserEmail.setText(user?.email)
+                        etUserAddress.setText(user?.address)
+                        etUserPhone.setText(user?.phone)
+                        etUserStore.setText(user?.store)
+                        tvUserDof.text = user?.date
+
+                        Glide.with(this@SettingProfileActivity)
+                            .load(user?.photo)
+                            .into(imgUserPp)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("SettingProfileActivity", error.message)
+                }
+
+            }
+        )
+    }
+
+    private fun updateData() {
+        databaseReference.child(preference.getValue("username").toString()).addValueEventListener(
+            object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val user = snapshot.getValue(User::class.java)
+
+                    var date = binding.tvUserDof.text.toString()
+                    var store = binding.etUserStore.setText(user?.store).toString()
+                    var phome = binding.etUserPhone.setText(user?.phone).toString()
+                    var email = binding.etUserEmail.setText(user?.email).toString()
+                    var alamat = binding.etUserAddress.setText(user?.address).toString()
+                    var username = binding.etUserName.setText(user?.username).toString()
+
+                    if (username.isEmpty()){
+                        binding.etUserName.error = "Field ini kosong"
+                    } else if(email.isEmpty()){
+                        binding.etUserEmail.error = "Field ini kosong"
+                    } else if(phome.isEmpty()){
+                        binding.etUserPhone.error = "Field ini kosong"
+                    } else if(store.isEmpty()){
+                        binding.etUserStore.error = "Field ini kosong"
+                    } else if(alamat.isEmpty()){
+                        binding.etUserAddress.error = "Field ini kosong"
+                    } else if(date.isEmpty()){
+                        binding.tvUserDof.error = "Field ini kosong"
+                    } else {
+                        updateUser(username, alamat, store, email, date, phome)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("SettingProfileActivity", error.message)
+                }
+            }
+        )
+    }
+
+    private fun updateUser(
+        username: String,
+        alamat: String,
+        store: String,
+        email: String,
+        date: String,
+        phome: String
+    ) {
+        val user = User()
+        user.username = username
+        user.store = store
+        user.address = alamat
+        user.photo = phome
+        user.email = email
+        user.date = date
+
+        databaseReference.child(preference.getValue("username").toString()).setValue(user)
+            .addOnCompleteListener {
+                Toast.makeText(this, "Update data Success", Toast.LENGTH_SHORT).show()
+            }
     }
 
     override fun onClick(v: View?) {
