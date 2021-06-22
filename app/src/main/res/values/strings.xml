@@ -67,6 +67,12 @@
     <string name="my_feed">My Feed</string>
     <string name="my_order">My Order</string>
     <string name="book_details">Book Details</string>
+    <string name="bookmark">Bookmark</string>
+    <string name="checkout">Checkout</string>
+    <string name="order_details">Order Details</string>
+    <string name="profile">Profile</string>
+    <string name="cart">Cart</string>
+    <string name="checkout_details">Checkout Details</string>
 
 
 </resources>

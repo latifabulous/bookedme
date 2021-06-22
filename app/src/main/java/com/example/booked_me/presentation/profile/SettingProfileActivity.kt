@@ -35,7 +35,7 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var userAddress     : EditText
 
     private lateinit var btnSaved        : Button
-
+    private lateinit var btnBack         : Button
     private lateinit var imageUri        : Uri
 
     val REQUEST_CODE = 100
@@ -61,10 +61,12 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
         userAddress     = findViewById(R.id.et_user_address)
 
         btnSaved        = findViewById(R.id.btn_log_in)
+        btnBack         = findViewById(R.id.btn_back)
 
         userProfilePict.setOnClickListener(this)
         userDOF.setOnClickListener(this)
         btnSaved.setOnClickListener(this)
+        btnBack.setOnClickListener(this)
 
 
         storage = FirebaseStorage.getInstance().reference.child("profileImg/")
@@ -89,6 +91,9 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn_log_in-> {
                 
             }
+            R.id.btn_back -> {
+                super.onBackPressed()
+            }
         }
     }
 
@@ -110,8 +115,6 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
                     hashMap.put("imageUrl", uri.toString())
                     databaseReference.setValue(hashMap)
                     Toast.makeText(this,"Profile Updated", Toast.LENGTH_SHORT).show()
-
-
                 }
             }
 

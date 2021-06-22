@@ -16,9 +16,6 @@ class DetailBookActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_book)
 
-//        setUpTabs()
-
-
         backButton = findViewById(R.id.btn_back)
         backButton.setOnClickListener(this)
 
@@ -33,7 +30,11 @@ class DetailBookActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        super.onBackPressed()
+        when (v?.id) {
+            R.id.btn_back -> {
+                super.onBackPressed()
+            }
+        }
     }
 
 //    fun setUpTabs() {

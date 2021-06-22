@@ -11,6 +11,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:layout_marginBottom="24dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:onClick="onClick"
+                android:background="@drawable/btn_back_brown2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:alpha=".8"
+                android:text="@string/bookmark"
+                android:textColor="@color/black_s5"
+                android:textSize="18sp" />
+            <Button
+                android:id="@+id/btn_bookmark"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/btn_menu_brown2"/>
+        </LinearLayout>
         <androidx.cardview.widget.CardView
             android:id="@+id/cardview_progress"
             android:layout_width="match_parent"
@@ -121,17 +156,19 @@
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:orientation="vertical">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="bottom"-->
+<!--            android:gravity="bottom"-->
+<!--            android:orientation="vertical">-->
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/btn_gradient"
                 android:text="Add all to cart"
+                android:layout_gravity="bottom"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="24dp"
@@ -139,6 +176,6 @@
                 android:textSize="14sp"
                 android:textAllCaps="false"
                 android:textColor="@color/white_s6"/>
-        </LinearLayout>
+<!--        </LinearLayout>-->
     </LinearLayout>
 </ScrollView>
