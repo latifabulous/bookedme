@@ -16,6 +16,8 @@ import com.bumptech.glide.Glide
 import com.example.booked_me.R
 import com.example.booked_me.data.User
 import com.example.booked_me.databinding.FragmentProfileBinding
+import com.example.booked_me.presentation.feeds.AddBookActivity
+import com.example.booked_me.presentation.feeds.MyFeedsActivity
 import com.example.booked_me.presentation.login_register.LoginActivity
 import com.example.booked_me.presentation.order.OrderActivity
 import com.example.booked_me.presentation.profile.SettingProfileActivity
@@ -79,6 +81,11 @@ class ProfileFragment : Fragment() {
         llOrder.setOnClickListener {
             val orderIntent = Intent(activity, OrderActivity::class.java)
             startActivity(orderIntent)
+        }
+
+        llFeed.setOnClickListener {
+            val feedIntent = Intent(activity, MyFeedsActivity::class.java)
+            startActivity(feedIntent)
         }
 
         llSetting.setOnClickListener {

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.feeds.AddBookActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="right"
+            android:layout_gravity="center|top">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="136dp"
+                    android:layout_height="192dp"
+                    app:cardCornerRadius="15dp">
+                    <ImageView
+                        android:id="@+id/img_book_cover"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/bg_white_dash"
+                        tools:ignore="ContentDescription" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+                        <TextView
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:layout_width="37dp"
+                            android:layout_height="37dp"
+                            android:backgroundTint="@color/grey_s2"
+                            android:background="@drawable/ic_plus"/>
+                        <TextView
+                            android:id="@+id/tv_book_author"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="24dp"
+                            android:padding="8dp"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="Click here to upload image"
+                            android:textColor="@color/grey_s2"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+            </FrameLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:layout_marginLeft="20dp"
+            android:textSize="12sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/grey_s1"
+            android:fontFamily="@font/poppins_semibold"/>
+
+        <EditText
+            android:id="@+id/et_book_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:alpha=".8"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/bg_input"
+            android:ems="10"
+            android:fontFamily="@font/poppins_semibold"
+            android:inputType="text"
+            android:padding="16dp"
+            android:hint="Enter book title"
+            android:textColor="@color/black_s5"
+            android:textSize="14dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Author"
+            android:layout_marginLeft="20dp"
+            android:textSize="12sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/grey_s1"
+            android:fontFamily="@font/poppins_semibold"/>
+
+        <EditText
+            android:id="@+id/et_book_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:alpha=".8"
+            android:background="@drawable/bg_input"
+            android:ems="10"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:inputType="text"
+            android:padding="16dp"
+            android:textColor="@color/black_s5"
+            android:textSize="14dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Summary"
+            android:layout_marginLeft="20dp"
+            android:textSize="12sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/grey_s1"
+            android:fontFamily="@font/poppins_semibold"/>
+
+        <EditText
+            android:id="@+id/et_book_summary"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginBottom="15dp"
+            android:alpha=".8"
+            android:background="@drawable/bg_input"
+            android:ems="10"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:inputType="text"
+            android:padding="16dp"
+            android:textColor="@color/black_s5"
+            android:textSize="14dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:layout_marginLeft="20dp"
+            android:textSize="12sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/grey_s1"
+            android:fontFamily="@font/poppins_semibold"/>
+
+        <EditText
+            android:id="@+id/et_book_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:alpha=".8"
+            android:background="@drawable/bg_input"
+            android:ems="10"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:inputType="text"
+            android:padding="16dp"
+            android:textColor="@color/black_s5"
+            android:textSize="14dp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_gradient"
+            android:text="Booked Me"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/poppins_bold"
+            android:layout_marginTop="100dp"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:textColor="@color/white_s6"/>
+    </LinearLayout>
+
+
+</ScrollView>
