@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.login_register.LoginActivity">
 
     <LinearLayout
@@ -57,10 +58,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:alpha=".8"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:drawableStart="@drawable/ic_email"
-            android:drawablePadding="10dp"
+            android:drawablePadding="16dp"
             android:background="@drawable/bg_input"
             android:padding="16dp"
             android:fontFamily="@font/poppins_semibold"
@@ -69,23 +71,37 @@
             android:hint="@string/username"
             android:layout_marginBottom="15dp"/>
 
-        <EditText
-            android:id="@+id/et_password"
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:drawableStart="@drawable/ic_password"
-            android:drawablePadding="7dp"
-            android:background="@drawable/bg_input"
-            android:padding="16dp"
-            android:fontFamily="@font/poppins_semibold"
-            android:textSize="14dp"
-            android:textColor="@color/black_s5"
-            android:hint="@string/pass"
-            android:layout_marginBottom="15dp"/>
+            app:passwordToggleTint="@color/grey_s2"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:expandedHintEnabled="false"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:alpha=".8"
+                android:inputType="textPassword"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:drawableStart="@drawable/ic_password"
+                android:drawablePadding="16dp"
+                android:background="@drawable/bg_input"
+                android:padding="16dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="14dp"
+                android:textColor="@color/black_s5"
+                android:hint="@string/pass"
+                android:layout_marginBottom="15dp"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <TextView
             android:layout_width="match_parent"

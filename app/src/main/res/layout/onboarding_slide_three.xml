@@ -47,17 +47,17 @@
             android:id="@+id/button"
             android:layout_width="88dp"
             android:layout_height="32dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="-160dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/btn_brown_4"
             android:text="Get Started"
+            android:fontFamily="@font/poppins_semibold"
             android:textAllCaps="false"
             android:layout_gravity="center"
             android:onClick="toLoginPage"
             android:backgroundTint="@color/brown_3"
             android:textColor="@color/brown_5"
-            android:textSize="10sp"
-            android:textStyle="bold" />
+            android:textSize="10sp" />
 
         <FrameLayout
             android:layout_width="wrap_content"

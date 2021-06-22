@@ -14,7 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bookedme">
-<<<<<<< HEAD
 <!--        <activity android:name=".profile.SettingProfileActivity"></activity>-->
 <!--        <activity android:name=".order.OrderDetailActivity" />-->
 <!--        &lt;!&ndash; <activity android:name=".SplashScreenActivity" /> &ndash;&gt;-->
@@ -24,7 +23,6 @@
 <!--        <activity android:name=".SplashScreenActivity" />-->
 <!--        <activity android:name=".DetailBookActivity" />-->
 <!--        <activity android:name=".MainActivity">-->
-=======
         <activity android:name=".presentation.profile.SettingProfileActivity"/>
         <activity android:name=".presentation.order.OrderDetailActivity" /> <!-- <activity android:name=".SplashScreenActivity" /> -->
         <activity android:name=".presentation.order.OrderActivity" />
@@ -35,7 +33,6 @@
         <activity android:name=".presentation.login_register.RegisterActivity"/>
         <activity android:name=".presentation.login_register.LoginActivity"/>
         <activity android:name=".presentation.SplashScreenActivity" >
->>>>>>> bbdf8337d928c3f35ec36e16a8a64c51a971d620
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

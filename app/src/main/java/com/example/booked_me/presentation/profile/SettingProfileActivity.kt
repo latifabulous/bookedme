@@ -89,10 +89,6 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn_log_in-> {
                 
             }
-
-
-
-
         }
     }
 

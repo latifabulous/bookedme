@@ -2,19 +2,25 @@ package com.example.booked_me.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 import com.example.booked_me.R
 import com.example.booked_me.databinding.ActivityDetailBookBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
-class DetailBookActivity : AppCompatActivity() {
+class DetailBookActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding : ActivityDetailBookBinding
-
+    private lateinit var backButton : Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_book)
 
 //        setUpTabs()
+
+
+        backButton = findViewById(R.id.btn_back)
+        backButton.setOnClickListener(this)
 
         binding = ActivityDetailBookBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -24,6 +30,10 @@ class DetailBookActivity : AppCompatActivity() {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.setText(com.example.booked_me.presentation.tab_fragments.adapters.ViewPagerAdapter.TAB_TITLE[position])
         }.attach()
+    }
+
+    override fun onClick(v: View?) {
+        super.onBackPressed()
     }
 
 //    fun setUpTabs() {

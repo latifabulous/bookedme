@@ -66,6 +66,7 @@
     <string name="alamat">Jl. Raya Tanjung, Gunungsari LOMBOK BARAT, 83351</string>
     <string name="my_feed">My Feed</string>
     <string name="my_order">My Order</string>
+    <string name="book_details">Book Details</string>
 
 
 </resources>

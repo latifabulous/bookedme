@@ -42,9 +42,11 @@
                 android:orientation="vertical"
                 android:gravity="center"
                 android:layout_gravity="center">
+
+
                 <androidx.cardview.widget.CardView
-                    android:layout_width="150dp"
-                    android:layout_height="210dp"
+                    android:layout_width="136dp"
+                    android:layout_height="192dp"
                     app:cardCornerRadius="15dp"
                     app:cardElevation="4dp">
 
@@ -79,6 +81,40 @@
                     android:text="Leila S. Chudori"
                     android:textColor="@color/white_s6"
                     android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_back"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:onClick="onClick"
+                    android:background="@drawable/btn_back"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/book_details"
+                    android:textColor="@color/white_s6"
+                    android:textSize="18sp" />
+                <Button
+                    android:id="@+id/btn_bookmark"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/btn_bookmark2_selector"/>
             </LinearLayout>
         </FrameLayout>
 

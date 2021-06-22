@@ -45,16 +45,17 @@
         <Button
             android:id="@+id/button"
             android:layout_width="88dp"
-            android:layout_height="39dp"
+            android:layout_height="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/btn_brown_4"
             android:text="Skip"
+            android:fontFamily="@font/poppins_semibold"
             android:layout_gravity="center"
             android:onClick="nextPage"
             android:textColor="@color/grey_s2"
             android:textSize="10sp"
-            android:textStyle="bold" />
+            android:textAllCaps="false"/>
 
         <FrameLayout
             android:layout_width="wrap_content"
