@@ -8,9 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.booked_me.adapter.BookAdapter
 import com.example.booked_me.presentation.DetailBookActivity
 import com.example.booked_me.R
+import com.example.booked_me.adapter.HorizontalBookAdapter
+import com.example.booked_me.data.Book
 import com.example.booked_me.data.User
 import com.example.booked_me.databinding.FragmentHomeBinding
 import com.example.booked_me.utils.Preference
@@ -21,7 +25,11 @@ class HomeFragment : Fragment() {
     private lateinit var tv_book_title: TextView
     private lateinit var binding : FragmentHomeBinding
     private lateinit var firebase : DatabaseReference
+    private lateinit var firebaseBuku : DatabaseReference
     private lateinit var preferences : Preference
+
+    //atribut
+    private var listBuku = ArrayList<Book>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,14 +46,34 @@ class HomeFragment : Fragment() {
         preferences = Preference(requireContext())
 
         firebase = FirebaseDatabase.getInstance().getReference("user")
-        tv_book_title = view.findViewById(R.id.tv_book_title)
-
-        tv_book_title.setOnClickListener {
-            val detailIntent = Intent(activity, DetailBookActivity::class.java)
-            startActivity(detailIntent)
-        }
+        firebaseBuku = FirebaseDatabase.getInstance().getReference("buku")
 
         getData()
+
+        //readBuku
+        binding.rvItem.layoutManager = LinearLayoutManager(view.context)
+        binding.rvBuku.layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false )
+
+        firebaseBuku.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                listBuku.clear()
+                for (books in snapshot.children){
+                    val buku = books.getValue(Book::class.java)
+                    listBuku.add(buku!!)
+                    Log.d("HomeFragment", buku.toString())
+                }
+
+                binding.rvItem.adapter = BookAdapter(listBuku)
+                binding.rvBuku.adapter = HorizontalBookAdapter(listBuku)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("HomeFragment", error.message)
+            }
+
+        })
+
+
     }
 
     private fun getData() {

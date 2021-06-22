@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        style="@style/CardMargin"
+        android:layout_width="150dp"
+        android:layout_height="210dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="4dp">
+
+        <ImageView
+            android:id="@+id/img_book_cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/jw"
+            tools:ignore="ContentDescription" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_book_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Laut Bercerita"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/playfair_display_bold"
+        android:textColor="@color/black_s5"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_book_author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Leila S. Chudori"
+        android:textColor="@color/grey_s4"
+        android:textSize="12sp" />
+
+</LinearLayout>

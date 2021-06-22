@@ -29,10 +29,10 @@
         <activity android:name=".presentation.onboarding.OnBoardingActivity" />
         <activity android:name=".presentation.CartActivity" />
         <activity android:name=".presentation.DetailBookActivity" />
-        <activity android:name=".presentation.SplashScreenActivity" />
+        <activity android:name=".presentation.MainActivity" />
         <activity android:name=".presentation.login_register.RegisterActivity" />
         <activity android:name=".presentation.login_register.LoginActivity" />
-        <activity android:name=".presentation.MainActivity">
+        <activity android:name=".presentation.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
