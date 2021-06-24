@@ -61,7 +61,7 @@ class ViewPagerAdapter(fragmentActivity: FragmentActivity, private val buku : Bo
             1 -> {
                 val bundle = Bundle()
                 val ownerFragment = OwnerFragment()
-                bundle.putString("EXTRA_DATA", buku.penulis)
+                bundle.putString("EXTRA_DATA", buku.userInput)
                 ownerFragment.arguments = bundle
                 ownerFragment
             }
