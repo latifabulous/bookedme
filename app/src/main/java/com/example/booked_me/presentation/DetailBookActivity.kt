@@ -65,7 +65,7 @@ class DetailBookActivity : AppCompatActivity(), View.OnClickListener {
                 book.judul = buku.judul
                 book.penulis = buku.penulis
                 book.rating = buku.rating
-                book.isBookmark = true
+                book.isBookmark = isBookmark
 
                 database.child(preference.getValue("username").toString()).child("data_bookmark")
                     .child(buku.judul.toString()).setValue(book).addOnSuccessListener {

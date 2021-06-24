@@ -24,7 +24,6 @@
                 android:layout_marginLeft="20dp"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:onClick="onClick"
                 android:background="@drawable/btn_back_brown2"/>
 
             <TextView
@@ -46,116 +45,18 @@
                 android:layout_height="40dp"
                 android:background="@drawable/btn_menu_brown2"/>
         </LinearLayout>
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardview_progress"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="15dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            app:cardElevation="4dp">
-
-            <LinearLayout
+            android:orientation="vertical">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_bookmark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                tools:listitem="@layout/list_bookmark"/>
+        </LinearLayout>
 
-                android:padding="16dp">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="80dp"
-                    android:layout_height="104dp"
-                    app:cardCornerRadius="15dp">
-
-                    <ImageView
-                        android:id="@+id/img_book_cover"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/jw"
-                        tools:ignore="ContentDescription" />
-                </androidx.cardview.widget.CardView>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="16dp">
-
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight=".9"
-                            android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/tv_book_title"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Latifabulous"
-                                android:textSize="14sp"
-                                android:textColor="@color/brown_5"
-                                android:fontFamily="@font/playfair_display_bold"/>
-                            <TextView
-                                android:id="@+id/tv_book_author"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Sapardi Djoko Damono"
-                                android:textSize="12sp"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp"
-                                android:textColor="@color/grey_s4"
-                                android:fontFamily="@font/poppins_medium"/>
-
-                        </LinearLayout>
-
-                        <ImageButton
-                            android:id="@+id/btn_add_cart"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/btn_cart_selector"
-                            android:padding="20dp"/>
-                    </LinearLayout>
-                    <TextView
-                        android:id="@+id/tv_book_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Rp.5000"
-                        android:layout_marginBottom="4dp"
-                        android:textSize="14sp"
-                        android:textColor="@color/green_1"
-                        android:fontFamily="@font/poppins_semibold"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/ic_address"
-                            android:layout_gravity="center"/>
-                        <TextView
-                            android:id="@+id/tv_book_address"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="10sp"
-                            android:layout_marginLeft="8dp"
-                            android:textColor="@color/grey_s1"
-                            android:fontFamily="@font/poppins_medium"
-                            android:text="Rembiga"/>
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
 <!--        <LinearLayout-->
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="match_parent"-->
@@ -164,6 +65,7 @@
 <!--            android:orientation="vertical">-->
 
             <Button
+                android:id="@+id/btn_add_cart"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/btn_gradient"

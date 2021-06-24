@@ -22,6 +22,7 @@ import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ListResult
 import com.google.firebase.storage.StorageReference
+import com.squareup.picasso.Picasso
 
 class HomeFragment : Fragment() {
 
@@ -55,45 +56,44 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        preferences = Preference(requireContext())
-        storage = FirebaseStorage.getInstance()
-        storageRef = FirebaseStorage.getInstance().reference.child("buku")
-        firebase = FirebaseDatabase.getInstance().getReference("user")
-        firebaseBuku = FirebaseDatabase.getInstance().getReference("buku")
-
-        getData()
-
-        //readBuku
+        if (activity != null) {
 
 
+            preferences = Preference(requireContext())
+            storage = FirebaseStorage.getInstance()
+            storageRef = FirebaseStorage.getInstance().reference.child("buku")
+            firebase = FirebaseDatabase.getInstance().getReference("user")
+            firebaseBuku = FirebaseDatabase.getInstance().getReference("buku")
+
+            getData()
 
 
-        bukuMutableList = ArrayList()
+            bukuMutableList = ArrayList()
 
-        binding.rvItem.layoutManager = LinearLayoutManager(view.context)
-        binding.rvBuku.layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false )
+            binding.rvItem.layoutManager = LinearLayoutManager(view.context)
+            binding.rvBuku.layoutManager =
+                LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
 
-        dbListener = firebaseBuku!!.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                bukuMutableList.clear()
-                for (books in snapshot.children){
-                    val buku = books.getValue(Book::class.java)
-                    buku!!.judul = books.key
-                    bukuMutableList.add(buku)
+            dbListener = firebaseBuku!!.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    bukuMutableList.clear()
+                    for (books in snapshot.children) {
+                        val buku = books.getValue(Book::class.java)
+                        buku!!.judul = books.key
+                        bukuMutableList.add(buku)
 //                    Log.d("HomeFragment", buku.toString())
+                    }
+
+                    binding.rvItem.adapter = BookAdapter(view.context, bukuMutableList)
+                    binding.rvBuku.adapter = HorizontalBookAdapter(bukuMutableList)
                 }
 
-                binding.rvItem.adapter = BookAdapter(view.context, bukuMutableList)
-                binding.rvBuku.adapter = HorizontalBookAdapter(bukuMutableList)
-            }
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("HomeFragment", error.message)
+                }
 
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("HomeFragment", error.message)
-            }
-
-        })
-
+            })
+        }
 
     }
 
@@ -109,9 +109,8 @@ class HomeFragment : Fragment() {
                 val user = snapshot.getValue(User::class.java)
 
                 binding.tvHiUname.setText("Hi, ${user?.username}!")
-                Glide.with(requireContext())
+                Picasso.get()
                     .load(user?.photo)
-                    .circleCrop()
                     .into(binding.ivAvatar)
             }
 

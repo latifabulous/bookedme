@@ -74,8 +74,9 @@ class RegisterActivity : AppCompatActivity() {
 
                 if (user == null){
                     firebase.child(username).setValue(dataUser)
-
                     Toast.makeText(this@RegisterActivity, "Register Success", Toast.LENGTH_SHORT).show()
+                    finish()
+                    startActivity(Intent(this@RegisterActivity,LoginActivity::class.java))
                 } else {
                     Toast.makeText(this@RegisterActivity, "User has been added", Toast.LENGTH_SHORT).show()
                 }
