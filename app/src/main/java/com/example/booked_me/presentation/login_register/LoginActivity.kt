@@ -48,6 +48,12 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         preferences = Preference(this)
+        preferences.setValue("onBoarding", "1")
+        if (preferences.getValue("status").equals("1")){
+            finishAffinity()
+
+            startActivity(Intent(this, MainActivity::class.java))
+        }
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -98,6 +104,7 @@ class LoginActivity : AppCompatActivity() {
                 } else {
 
                     preferences.setValue("username", user.username.toString())
+                    preferences.setValue("status", "1")
 
                     Log.d("LoginActivity", user.toString())
                     if (username == user.username && password == user.password){
@@ -158,6 +165,7 @@ class LoginActivity : AppCompatActivity() {
 
                     val username = task.result?.user?.displayName.toString()
                     preferences.setValue("username", username)
+                    preferences.setValue("status", "1")
 
                     firebase.child(username).setValue(user)
 

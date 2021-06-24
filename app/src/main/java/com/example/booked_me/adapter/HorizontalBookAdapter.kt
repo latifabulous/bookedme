@@ -1,5 +1,6 @@
 package com.example.booked_me.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.booked_me.R
 import com.example.booked_me.data.Book
 import com.example.booked_me.databinding.ListBookBinding
+import com.example.booked_me.presentation.DetailBookActivity
 import com.squareup.picasso.Picasso
 
 class HorizontalBookAdapter(private var listBuku : List<Book>)
@@ -22,6 +24,12 @@ class HorizontalBookAdapter(private var listBuku : List<Book>)
 //                Glide.with(itemView.context)
 //                    .load(book.gambar)
 //                    .into(imgBookCover)
+
+                itemView.setOnClickListener {
+                    val intent = Intent(itemView.context, DetailBookActivity::class.java)
+                    intent.putExtra("EXTRA_DATA", book)
+                    itemView.context.startActivity(intent)
+                }
             }
         }
     }

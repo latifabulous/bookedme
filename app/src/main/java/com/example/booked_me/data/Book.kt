@@ -1,7 +1,10 @@
 package com.example.booked_me.data
 
+import android.os.Parcelable
 import com.google.firebase.database.Exclude
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Book(
     var alamat : String? = null,
     var bahasa : String? = null,
@@ -12,7 +15,8 @@ data class Book(
     var judul : String? = null,
     var penulis : String? = null,
     var rating : String? = null,
+    var userInput : String? = null,
     @get:Exclude
     @set:Exclude
     var key:String? = null
-    )
+    ) : Parcelable

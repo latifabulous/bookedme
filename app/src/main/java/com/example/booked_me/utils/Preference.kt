@@ -14,4 +14,9 @@ class Preference (context : Context) {
     fun getValue(key : String) : String? {
         return pref.getString(key, "")
     }
+
+    fun logout(){
+        edit.clear()
+        edit.commit()
+    }
 }

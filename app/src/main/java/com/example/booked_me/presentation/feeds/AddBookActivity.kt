@@ -13,6 +13,7 @@ import android.widget.*
 import com.example.booked_me.R
 import com.example.booked_me.data.Book
 import com.example.booked_me.data.User
+import com.example.booked_me.utils.Preference
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
@@ -41,6 +42,7 @@ class AddBookActivity : AppCompatActivity(), View.OnClickListener {
     private var upTask :StorageTask<*>? = null
     private var databaseReference: DatabaseReference? = null
     private var storageReference : StorageReference? = null
+    private lateinit var preference: Preference
 
     private lateinit var btnSave : Button
 
@@ -63,6 +65,7 @@ class AddBookActivity : AppCompatActivity(), View.OnClickListener {
         btnSave = findViewById(R.id.btn_save)
         btnCancel = findViewById(R.id.btn_cancel)
 
+        preference = Preference(this)
 
         btnCancel.setOnClickListener(this)
         btnSave.setOnClickListener(this)
@@ -169,6 +172,7 @@ class AddBookActivity : AppCompatActivity(), View.OnClickListener {
                 buku.bahasa = bahasa
                 buku.rating = "0"
                 buku.gambar = gambar
+                buku.userInput = preference.getValue("username")
 
                 databaseReference!!.child((judul)!!).setValue(buku)
                 pbAdd.visibility = View.INVISIBLE
@@ -194,6 +198,7 @@ class AddBookActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun openImageActivity() {
+        finishAffinity()
         startActivity(Intent(this@AddBookActivity, MyFeedsActivity::class.java))
     }
 }

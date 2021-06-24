@@ -8,15 +8,24 @@ import com.example.booked_me.presentation.MainActivity
 import com.example.booked_me.R
 import com.example.booked_me.databinding.ActivityOnBoardingBinding
 import com.example.booked_me.presentation.login_register.LoginActivity
+import com.example.booked_me.utils.Preference
 
 class OnBoardingActivity : AppCompatActivity() {
     private lateinit var binding : ActivityOnBoardingBinding
     private lateinit var adapter : OnBoardingAdapter
+    private lateinit var preference : Preference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOnBoardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        preference = Preference(this)
+        if (preference.getValue("onBoarding") == "1"){
+            finishAffinity()
+
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
 
         adapter = OnBoardingAdapter(this)
 
@@ -40,6 +49,7 @@ class OnBoardingActivity : AppCompatActivity() {
 
     fun toLoginPage(view : View){
         if (view.id == R.id.button){
+            preference.setValue("onBoarding", "1")
             finish()
             startActivity(Intent(this, LoginActivity::class.java))
         }
