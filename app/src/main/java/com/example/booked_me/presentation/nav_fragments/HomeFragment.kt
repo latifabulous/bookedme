@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
     private lateinit var storageRef : StorageReference
     private lateinit var storage : FirebaseStorage
 
-//    private lateinit var bukuMutableList : MutableList<Book>
+    private lateinit var bukuMutableList : MutableList<Book>
 
 
     //atribut
@@ -69,23 +69,23 @@ class HomeFragment : Fragment() {
 
 
 
-//        bukuMutableList = ArrayList()
+        bukuMutableList = ArrayList()
 
         binding.rvItem.layoutManager = LinearLayoutManager(view.context)
         binding.rvBuku.layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false )
 
         dbListener = firebaseBuku!!.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                listBuku.clear()
+                bukuMutableList.clear()
                 for (books in snapshot.children){
                     val buku = books.getValue(Book::class.java)
                     buku!!.judul = books.key
-                    listBuku.add(buku)
-                    Log.d("HomeFragment", buku.toString())
+                    bukuMutableList.add(buku)
+//                    Log.d("HomeFragment", buku.toString())
                 }
 
-                binding.rvItem.adapter = BookAdapter(listBuku)
-                binding.rvBuku.adapter = HorizontalBookAdapter(listBuku)
+                binding.rvItem.adapter = BookAdapter(view.context, bukuMutableList)
+                binding.rvBuku.adapter = HorizontalBookAdapter(bukuMutableList)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -110,9 +110,9 @@ class HomeFragment : Fragment() {
 
                 binding.tvHiUname.setText("Hi, ${user?.username}!")
                 Glide.with(requireContext())
-                        .load(user?.photo)
-                        .circleCrop()
-                        .into(binding.ivAvatar)
+                    .load(user?.photo)
+                    .circleCrop()
+                    .into(binding.ivAvatar)
             }
 
             override fun onCancelled(error: DatabaseError) {

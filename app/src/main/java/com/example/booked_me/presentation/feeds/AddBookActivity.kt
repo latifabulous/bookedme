@@ -37,18 +37,20 @@ class AddBookActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var pbAdd : ProgressBar
 
     private var PICK_IMAGE_REQUEST = 1
-    private var imageUri : Uri? = null
+    private lateinit var imageUri : Uri
 
-    private var upTask :StorageTask<*>? = null
+    private var myUrl = ""
+
     private var databaseReference: DatabaseReference? = null
     private var storageReference : StorageReference? = null
     private lateinit var preference: Preference
-
     private lateinit var btnSave : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_book)
+
+        preference = Preference(this)
 
         etTitle = findViewById(R.id.et_book_title)
         etAuthor = findViewById(R.id.et_book_author)
@@ -59,13 +61,12 @@ class AddBookActivity : AppCompatActivity(), View.OnClickListener {
         ivCover = findViewById(R.id.img_book_cover)
         pbAdd = findViewById(R.id.pb_add)
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("buku")
-        storageReference = FirebaseStorage.getInstance().getReference("buku")
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("buku")
+        storageReference = FirebaseStorage.getInstance().reference.child("buku")
 
         btnSave = findViewById(R.id.btn_save)
         btnCancel = findViewById(R.id.btn_cancel)
 
-        preference = Preference(this)
 
         btnCancel.setOnClickListener(this)
         btnSave.setOnClickListener(this)
@@ -76,11 +77,10 @@ class AddBookActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id) {
             R.id.btn_save -> {
-                if (upTask != null && upTask!!.isInProgress) {
-
-                    Toast.makeText(this@AddBookActivity, "Still in Progress", Toast.LENGTH_SHORT).show()
-                }else{
+                if (imageUri != null) {
                     uploadFile()
+                }else{
+                    Toast.makeText(this@AddBookActivity, "Select an Image", Toast.LENGTH_SHORT).show()
                 }
             }
             R.id.img_book_cover -> {
@@ -97,36 +97,11 @@ class AddBookActivity : AppCompatActivity(), View.OnClickListener {
         startActivityForResult(intentGallery, PICK_IMAGE_REQUEST)
     }
 
-//    private fun saveData() {
-//        var judul = etTitle.text.toString().trim()
-//        var penulis = etAuthor.text.toString().trim()
-//        var deskripsi = etSummary.text.toString().trim()
-//        var bahasa = etLanguage.text.toString().trim()
-//        var halaman = etNumPages.text.toString().trim()
-//        var harga = etPrice.text.toString().trim()
-//        var gambar = imageUri.toString()
-//
-//
-//        val buku = Book()
-//        buku.judul = judul
-//        buku.penulis = penulis
-//        buku.halaman = halaman
-//        buku.deskripsi = deskripsi
-//        buku.harga = harga
-//        buku.bahasa = bahasa
-//        buku.rating = "0"
-//        buku.gambar = gambar
-//
-//        databaseReference.child(judul).setValue(buku).addOnCompleteListener {
-//            Toast.makeText(applicationContext, "Sukses", Toast.LENGTH_SHORT).show()
-//        }
-//    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
-            imageUri = data.data
+            imageUri = data.data!!
             ivCover.setImageURI(imageUri)
         }
     }
@@ -138,21 +113,40 @@ class AddBookActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun uploadFile() {
-        if (imageUri != null) {
-            val fileReference = storageReference!!.child(System.currentTimeMillis()
-                    .toString() + "." + ".png")
+        val fileReference = storageReference!!.child(
+            System.currentTimeMillis()
+                .toString() + "." + ".png"
+        )
 
-            pbAdd.visibility = View.VISIBLE
-            pbAdd.isIndeterminate = true
+        pbAdd.visibility = View.VISIBLE
+        pbAdd.isIndeterminate = true
 
-            upTask = fileReference.putFile(imageUri!!).addOnSuccessListener {takeSnapshot ->
+        var upTask :StorageTask<*>? = null
+
+        upTask = fileReference.putFile(imageUri!!)
+
+        upTask.continueWithTask(Continuation <UploadTask.TaskSnapshot, Task<Uri>>{ task ->
+            if (!task.isSuccessful)
+            {
+                task.exception?.let {
+                    throw it
+                }
+            }
+            return@Continuation fileReference.downloadUrl
+        }).addOnCompleteListener(OnCompleteListener<Uri> { task ->
+            if (task.isSuccessful) {
+                val downloadUrl = task.result
+                myUrl = downloadUrl.toString()
+                val ref = FirebaseDatabase.getInstance().reference.child("buku")
+
                 val handler = Handler()
                 handler.postDelayed(
-                        {
-                            pbAdd.visibility = View.VISIBLE
-                            pbAdd.isIndeterminate = false
-                            pbAdd.progress = 0
-                        }, 500)
+                    {
+                        pbAdd.visibility = View.VISIBLE
+                        pbAdd.isIndeterminate = false
+                        pbAdd.progress = 0
+                    }, 500
+                )
                 Toast.makeText(this@AddBookActivity, "Sukses", Toast.LENGTH_LONG).show()
 
                 var judul = etTitle.text.toString().trim()
@@ -161,7 +155,12 @@ class AddBookActivity : AppCompatActivity(), View.OnClickListener {
                 var bahasa = etLanguage.text.toString().trim()
                 var halaman = etNumPages.text.toString().trim()
                 var harga = etPrice.text.toString().trim()
-                var gambar = imageUri.toString()
+                var gambar = myUrl
+
+//
+//                if (judul.isEmpty()){
+//                    etTitle.error = "Field ini kosong"
+//                }
 
                 val buku = Book()
                 buku.judul = judul
@@ -177,28 +176,81 @@ class AddBookActivity : AppCompatActivity(), View.OnClickListener {
                 databaseReference!!.child((judul)!!).setValue(buku)
                 pbAdd.visibility = View.INVISIBLE
                 openImageActivity()
-
+            } else {
+                Toast.makeText(
+                    this@AddBookActivity,
+                    "You haven't select Any File",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-                    .addOnFailureListener { e ->
-                        pbAdd.visibility = View.INVISIBLE
-                        Toast.makeText(this@AddBookActivity, e.message, Toast.LENGTH_SHORT).show()
-                        Log.e("data","${e.message}")
-
-                    }
-                    .addOnProgressListener {
-                        tastSnapshot ->
-                        val mProgress = (100.0 * tastSnapshot.bytesTransferred/tastSnapshot.totalByteCount)
-                        pbAdd.progress = mProgress.toInt()
-
-                    }
-        } else {
-            Toast.makeText(this@AddBookActivity, "You haven't select Any File", Toast.LENGTH_SHORT).show()
-
         }
+
+        )
+
+
+//            .continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+//                if (!task.isSuccessful)
+//                {
+//                    task.exception?.let {
+//                        throw it
+//                    }
+//                }
+//                return@Continuation fileReference.downloadUrl
+//
+//            })
+
+//            .addOnCompleteListener(OnCompleteListener<Uri> { task ->
+//                if (task.isSuccessful)
+//                {
+//                    val downloadUrl = task.result
+//                    myUrl = downloadUrl.toString()
+//                    val ref = FirebaseDatabase.getInstance().reference.child("buku")
+//
+//                    val handler = Handler()
+//                    handler.postDelayed(
+//                        {
+//                            pbAdd.visibility = View.VISIBLE
+//                            pbAdd.isIndeterminate = false
+//                            pbAdd.progress = 0
+//                        }, 500
+//                    )
+//                    Toast.makeText(this@AddBookActivity, "Sukses", Toast.LENGTH_LONG).show()
+//
+//                    var judul = etTitle.text.toString().trim()
+//                    var penulis = etAuthor.text.toString().trim()
+//                    var deskripsi = etSummary.text.toString().trim()
+//                    var bahasa = etLanguage.text.toString().trim()
+//                    var halaman = etNumPages.text.toString().trim()
+//                    var harga = etPrice.text.toString().trim()
+//                    var gambar = imageUri.toString()
+//
+//                    val buku = Book()
+//                    buku.judul = judul
+//                    buku.penulis = penulis
+//                    buku.halaman = halaman
+//                    buku.deskripsi = deskripsi
+//                    buku.harga = harga
+//                    buku.bahasa = bahasa
+//                    buku.rating = "0"
+//                    buku.gambar = gambar
+//
+//                    databaseReference!!.child((judul)!!).setValue(buku)
+//                    pbAdd.visibility = View.INVISIBLE
+//                    openImageActivity()
+//
+//                } else {
+//                    Toast.makeText(
+//                        this@AddBookActivity,
+//                        "You haven't select Any File",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//
+//                }
+//            })
     }
 
     private fun openImageActivity() {
-        finishAffinity()
+        finish()
         startActivity(Intent(this@AddBookActivity, MyFeedsActivity::class.java))
     }
 }
