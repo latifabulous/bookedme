@@ -30,25 +30,25 @@ import kotlin.collections.HashMap
 
 class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
 
-    private lateinit var userProfilePict : CircleImageView
-    private lateinit var userDOF : TextView
+    private lateinit var userProfilePict: CircleImageView
+    private lateinit var userDOF: TextView
 
-    private lateinit var userName        : EditText
-    private lateinit var userEmail       : EditText
-    private lateinit var userPhoneNum    : EditText
-    private lateinit var userStore       : EditText
-    private lateinit var userAddress     : EditText
+    private lateinit var userName: EditText
+    private lateinit var userEmail: EditText
+    private lateinit var userPhoneNum: EditText
+    private lateinit var userStore: EditText
+    private lateinit var userAddress: EditText
 
-    private lateinit var btnUpdate        : Button
-    private lateinit var btnBack         : Button
-    private lateinit var imageUri        : Uri
+    private lateinit var btnUpdate: Button
+    private lateinit var btnBack: Button
+    private lateinit var imageUri: Uri
 
     val REQUEST_CODE = 100
 
-    lateinit var storage : StorageReference
-    private lateinit var binding : ActivitySettingProfileBinding
+    lateinit var storage: StorageReference
+    private lateinit var binding: ActivitySettingProfileBinding
     private lateinit var databaseReference: DatabaseReference
-    private lateinit var preference : Preference
+    private lateinit var preference: Preference
 
     val calendar = Calendar.getInstance()
     val year = calendar.get((Calendar.YEAR))
@@ -64,14 +64,14 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
         userProfilePict = findViewById(R.id.img_user_pp)
         userDOF = findViewById(R.id.tv_user_dof)
 
-        userName        = findViewById(R.id.et_user_name)
-        userEmail       = findViewById(R.id.et_user_email)
-        userPhoneNum    = findViewById(R.id.et_user_phone)
-        userStore       = findViewById(R.id.et_user_store)
-        userAddress     = findViewById(R.id.et_user_address)
+        userName = findViewById(R.id.et_user_name)
+        userEmail = findViewById(R.id.et_user_email)
+        userPhoneNum = findViewById(R.id.et_user_phone)
+        userStore = findViewById(R.id.et_user_store)
+        userAddress = findViewById(R.id.et_user_address)
 
-        btnUpdate        = findViewById(R.id.btn_update)
-        btnBack         = findViewById(R.id.btn_back)
+        btnUpdate = findViewById(R.id.btn_update)
+        btnBack = findViewById(R.id.btn_back)
 
         userProfilePict.setOnClickListener(this)
         userDOF.setOnClickListener(this)
@@ -84,13 +84,13 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    private fun readData(){
+    private fun readData() {
         databaseReference.child(preference.getValue("username").toString()).addValueEventListener(
             object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val user = snapshot.getValue(User::class.java)
 
-                    with(binding){
+                    with(binding) {
                         etUserName.setText(user?.username)
                         etUserEmail.setText(user?.email)
                         etUserAddress.setText(user?.address)
@@ -120,17 +120,19 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
         var alamat = userAddress.text.toString()
         var username = userName.text.toString()
 
-        if (username.isEmpty()){
+
+
+        if (username.isEmpty()) {
             userName.error = "Field ini kosong"
-        } else if(email.isEmpty()){
+        } else if (email.isEmpty()) {
             userEmail.error = "Field ini kosong"
-        } else if(phone.isEmpty()){
+        } else if (phone.isEmpty()) {
             userPhoneNum.error = "Field ini kosong"
-        } else if(store.isEmpty()){
+        } else if (store.isEmpty()) {
             userStore.error = "Field ini kosong"
-        } else if(alamat.isEmpty()){
+        } else if (alamat.isEmpty()) {
             userAddress.error = "Field ini kosong"
-        } else if(date.isEmpty()){
+        } else if (date.isEmpty()) {
             userDOF.error = "Field ini kosong"
         } else {
             updateUser(username, alamat, store, email, date, phone)
@@ -169,21 +171,28 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
+        when (v?.id) {
             R.id.img_user_pp -> {
                 val intentGallery = Intent(Intent.ACTION_PICK)
                 intentGallery.type = "image/*"
                 startActivityForResult(intentGallery, REQUEST_CODE)
             }
             R.id.tv_user_dof -> {
-                val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener{view, mYear, mMonth, mDay ->
-                    userDOF.setText("" + mDay + "/" + mMonth + "/" + mYear)
-                }, year, month, day)
+                val dpd = DatePickerDialog(
+                    this,
+                    DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
+                        userDOF.setText("" + mDay + "/" + mMonth + "/" + mYear)
+                    },
+                    year,
+                    month,
+                    day
+                )
 
                 dpd.show()
             }
 
-            R.id.btn_update-> {
+
+            R.id.btn_update -> {
                 updateData()
             }
             R.id.btn_back -> {
@@ -194,10 +203,10 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE){
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
 
             val imageData = data!!.getData()
-            val imageName:StorageReference = storage.child("image" + imageData!!.getLastPathSegment())
+            val imageName: StorageReference = storage.child("image" + imageData!!.getLastPathSegment())
 
 
             imageName.putFile(imageData).addOnSuccessListener {
@@ -205,15 +214,17 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
                 imageName.getDownloadUrl().addOnSuccessListener { uri ->
                     val databaseReference: DatabaseReference =
                         FirebaseDatabase.getInstance().getReference("user").child(preference.getValue("username").toString())
+
                     val hashMap: HashMap<String, Any> = hashMapOf(
                         "photo" to uri.toString()
                     )
                     databaseReference.updateChildren(hashMap)
-                    Toast.makeText(this,"Profile Updated", Toast.LENGTH_SHORT).show()
+
+                    Toast.makeText(this, "Profile Updated", Toast.LENGTH_SHORT).show()
                 }
             }
 
         }
     }
-
 }
+

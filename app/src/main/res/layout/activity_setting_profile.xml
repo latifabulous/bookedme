@@ -83,7 +83,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your Name"
+            android:text="Store"
             android:textSize="12sp"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="8dp"
@@ -95,14 +95,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:alpha=".8"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/bg_input"
             android:padding="16dp"
-            android:alpha=".8"
             android:fontFamily="@font/poppins_semibold"
             android:textSize="14dp"
-            android:text="Nur Izza Latifah"
+            android:text="Latifabulous"
             android:textColor="@color/black_s5"
             android:inputType="text"
             android:layout_marginBottom="15dp"/>
@@ -177,7 +177,6 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:alpha=".8"
-
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/bg_input"

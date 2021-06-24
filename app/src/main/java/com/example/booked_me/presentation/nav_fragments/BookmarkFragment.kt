@@ -123,6 +123,12 @@ class BookmarkFragment : Fragment(), View.OnClickListener {
                                                 .addOnSuccessListener {
                                                     Toast.makeText(view?.context, "Add to Cart to Success", Toast.LENGTH_SHORT).show()
                                                 }
+
+////                                            transaksi.status = "Belum Bayar"
+//
+//                                            database.child(preference.getValue("username").toString())
+//                                                .child("cart_user").child(book?.judul.toString()).setValue(transaksi)
+
                                         }
                                     }
 

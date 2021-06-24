@@ -61,7 +61,7 @@
             android:alpha=".8"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:drawableStart="@drawable/ic_email"
+            android:drawableStart="@drawable/ic_user"
             android:drawablePadding="16dp"
             android:background="@drawable/bg_input"
             android:padding="16dp"
@@ -104,6 +104,7 @@
 
 
         <TextView
+            android:id="@+id/tv_forgot_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"

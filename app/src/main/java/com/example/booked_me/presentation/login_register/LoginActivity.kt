@@ -3,10 +3,12 @@ package com.example.booked_me.presentation.login_register
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.booked_me.R
@@ -23,14 +25,16 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
+import org.w3c.dom.Text
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     companion object{
         const val RC_SIGN_IN = 9001
         private var TAG = LoginActivity::class.java.simpleName
     }
 
+    private lateinit var tvForgotPassword : TextView
     private lateinit var binding: ActivityLoginBinding
     private lateinit var firebase: DatabaseReference
     private lateinit var googleSignInClient : GoogleSignInClient
@@ -47,6 +51,9 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        tvForgotPassword = findViewById(R.id.tv_forgot_pass)
+
+        tvForgotPassword.setOnClickListener(this)
         preferences = Preference(this)
         preferences.setValue("onBoarding", "1")
         if (preferences.getValue("status").equals("1")){
@@ -85,12 +92,10 @@ class LoginActivity : AppCompatActivity() {
         if (username.isEmpty()){
             binding.etUsername.error = "Email anda kosong"
             binding.etUsername.requestFocus()
+        } else if(password.isEmpty() || password.length < 6){
+            binding.etPassword.error = "Password should more than 6 characters"
         }
-        else if (password.isEmpty()){
-            binding.etPassword.error = "Password tidak boleh kosong"
-            binding.etPassword.requestFocus()
-        }
-        else {
+            else {
             login(username, password)
         }
 
@@ -178,5 +183,15 @@ class LoginActivity : AppCompatActivity() {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                 }
             }
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.tv_forgot_pass -> {
+                Intent(this@LoginActivity, ResetPasswordActivity::class.java).also {
+                    startActivity(it)
+                }
+            }
+        }
     }
 }

@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bookedme">
-        <activity android:name=".presentation.feeds.AddBookActivity"></activity>
+        <activity android:name=".presentation.login_register.ResetPasswordActivity"></activity>
+        <activity android:name=".presentation.feeds.AddBookActivity" />
         <activity android:name=".presentation.feeds.MyFeedsActivity" />
         <activity android:name=".presentation.profile.SettingProfileActivity" />
         <activity android:name=".presentation.order.OrderDetailActivity" />
@@ -25,6 +26,7 @@
         <activity android:name=".presentation.login_register.LoginActivity" />
         <activity android:name=".presentation.onboarding.OnBoardingActivity" />
         <activity android:name=".presentation.SplashScreenActivity" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -117,7 +117,7 @@ class DetailBookActivity : AppCompatActivity(), View.OnClickListener {
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                       Log.e("DetailBookActivity", error.message)
+                        Log.e("DetailBookActivity", error.message)
                     }
 
                 })

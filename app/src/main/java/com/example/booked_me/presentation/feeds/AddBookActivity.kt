@@ -25,6 +25,8 @@ import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
 
 class AddBookActivity : AppCompatActivity(), View.OnClickListener {
+
+    private lateinit var btnBack : Button
     private lateinit var etTitle : EditText
     private lateinit var etAuthor : EditText
     private lateinit var etSummary : EditText
@@ -61,13 +63,14 @@ class AddBookActivity : AppCompatActivity(), View.OnClickListener {
         ivCover = findViewById(R.id.img_book_cover)
         pbAdd = findViewById(R.id.pb_add)
 
+        btnBack = findViewById(R.id.btn_back)
         databaseReference = FirebaseDatabase.getInstance().getReference().child("buku")
         storageReference = FirebaseStorage.getInstance().reference.child("buku")
 
         btnSave = findViewById(R.id.btn_save)
         btnCancel = findViewById(R.id.btn_cancel)
 
-
+        btnBack.setOnClickListener(this)
         btnCancel.setOnClickListener(this)
         btnSave.setOnClickListener(this)
         ivCover.setOnClickListener(this)
@@ -86,6 +89,9 @@ class AddBookActivity : AppCompatActivity(), View.OnClickListener {
             R.id.img_book_cover -> {
                 openFileChose()
 
+            }
+            R.id.btn_back -> {
+                super.onBackPressed()
             }
         }
     }
@@ -147,7 +153,6 @@ class AddBookActivity : AppCompatActivity(), View.OnClickListener {
                         pbAdd.progress = 0
                     }, 500
                 )
-                Toast.makeText(this@AddBookActivity, "Sukses", Toast.LENGTH_LONG).show()
 
                 var judul = etTitle.text.toString().trim()
                 var penulis = etAuthor.text.toString().trim()
@@ -173,9 +178,30 @@ class AddBookActivity : AppCompatActivity(), View.OnClickListener {
                 buku.gambar = gambar
                 buku.userInput = preference.getValue("username")
 
-                databaseReference!!.child((judul)!!).setValue(buku)
-                pbAdd.visibility = View.INVISIBLE
-                openImageActivity()
+                if (judul.isEmpty()){
+                    etTitle.error = "field cannot be empty"
+                }else if (penulis.isEmpty()){
+                    etAuthor.error = "field cannot be empty"
+                }else if (halaman.isEmpty()){
+                    etNumPages.error = "field cannot be empty"
+                }else if (deskripsi.isEmpty()){
+                    etSummary.error = "field cannot be empty"
+                }else if (harga.isEmpty()){
+                    etPrice.error = "field cannot be empty"
+                }else if (bahasa.isEmpty()){
+                    etLanguage.error = "field cannot be empty"
+                }else {
+                    databaseReference!!.child((judul)!!).setValue(buku)
+                    pbAdd.visibility = View.INVISIBLE
+
+                    Toast.makeText(this@AddBookActivity, "Sukses", Toast.LENGTH_LONG).show()
+
+                    openImageActivity()
+                }
+
+//                databaseReference!!.child((judul)!!).setValue(buku)
+//                pbAdd.visibility = View.INVISIBLE
+//                openImageActivity()
             } else {
                 Toast.makeText(
                     this@AddBookActivity,
@@ -184,69 +210,7 @@ class AddBookActivity : AppCompatActivity(), View.OnClickListener {
                 ).show()
             }
         }
-
         )
-
-
-//            .continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
-//                if (!task.isSuccessful)
-//                {
-//                    task.exception?.let {
-//                        throw it
-//                    }
-//                }
-//                return@Continuation fileReference.downloadUrl
-//
-//            })
-
-//            .addOnCompleteListener(OnCompleteListener<Uri> { task ->
-//                if (task.isSuccessful)
-//                {
-//                    val downloadUrl = task.result
-//                    myUrl = downloadUrl.toString()
-//                    val ref = FirebaseDatabase.getInstance().reference.child("buku")
-//
-//                    val handler = Handler()
-//                    handler.postDelayed(
-//                        {
-//                            pbAdd.visibility = View.VISIBLE
-//                            pbAdd.isIndeterminate = false
-//                            pbAdd.progress = 0
-//                        }, 500
-//                    )
-//                    Toast.makeText(this@AddBookActivity, "Sukses", Toast.LENGTH_LONG).show()
-//
-//                    var judul = etTitle.text.toString().trim()
-//                    var penulis = etAuthor.text.toString().trim()
-//                    var deskripsi = etSummary.text.toString().trim()
-//                    var bahasa = etLanguage.text.toString().trim()
-//                    var halaman = etNumPages.text.toString().trim()
-//                    var harga = etPrice.text.toString().trim()
-//                    var gambar = imageUri.toString()
-//
-//                    val buku = Book()
-//                    buku.judul = judul
-//                    buku.penulis = penulis
-//                    buku.halaman = halaman
-//                    buku.deskripsi = deskripsi
-//                    buku.harga = harga
-//                    buku.bahasa = bahasa
-//                    buku.rating = "0"
-//                    buku.gambar = gambar
-//
-//                    databaseReference!!.child((judul)!!).setValue(buku)
-//                    pbAdd.visibility = View.INVISIBLE
-//                    openImageActivity()
-//
-//                } else {
-//                    Toast.makeText(
-//                        this@AddBookActivity,
-//                        "You haven't select Any File",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//
-//                }
-//            })
     }
 
     private fun openImageActivity() {

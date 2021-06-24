@@ -195,6 +195,15 @@
                 android:layout_marginBottom="15dp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+<!--        <TextView-->
+<!--            android:id="@+id/tv_forgot_pass"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:gravity="end"-->
+<!--            android:layout_marginRight="20dp"-->
+<!--            android:text="@string/forgot_password"-->
+<!--            android:textColor="@color/green_1"-->
+<!--            android:textStyle="bold" />-->
 
         <CheckBox
             android:id="@+id/cb_policy"
@@ -209,20 +218,11 @@
             android:textColor="@color/grey_s1"
 
             android:text="@string/tnc"/>
-<!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:gravity="end"-->
-<!--            android:layout_marginRight="20dp"-->
-<!--            android:text="@string/forgot_password"-->
-<!--            android:textColor="@color/green_1"-->
-<!--            android:textStyle="bold" />-->
-
         <Button
             android:id="@+id/btn_log_in"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/signin"
+            android:text="@string/signup"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/poppins_semibold"
             android:height="56dp"

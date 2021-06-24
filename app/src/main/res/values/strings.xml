@@ -20,7 +20,7 @@
     <string name="nil">Nur Izza Latifah</string>
     <string name="desc">Description</string>
     <string name="sign_in">Sign In</string>
-    <string name="signup">Let\'s sign you in.</string>
+    <string name="signup">Let\'s sign you in</string>
     <string name="signup2">Welcome back. \nYou\'ve be missed!</string>
     <string name="username">Username</string>
     <string name="pass">Password</string>
@@ -74,6 +74,7 @@
     <string name="cart">Cart</string>
     <string name="checkout_details">Checkout Details</string>
     <string name="add_book">Add Book</string>
+    <string name="reset_pas">Reset Password</string>
 
 
 </resources>
