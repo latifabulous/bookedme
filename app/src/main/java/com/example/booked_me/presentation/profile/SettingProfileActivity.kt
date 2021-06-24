@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import java.io.ByteArrayOutputStream
 import java.util.*
@@ -74,15 +75,13 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
 
         userProfilePict.setOnClickListener(this)
         userDOF.setOnClickListener(this)
+        btnUpdate.setOnClickListener(this)
 
         databaseReference = FirebaseDatabase.getInstance().getReference("user")
         storage = FirebaseStorage.getInstance().reference.child("profileImg/")
 
         readData()
 
-        binding.btnUpdate.setOnClickListener {
-            updateData()
-        }
     }
 
     private fun readData(){
@@ -99,7 +98,7 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
                         etUserStore.setText(user?.store)
                         tvUserDof.text = user?.date
 
-                        Glide.with(this@SettingProfileActivity)
+                        Picasso.get()
                             .load(user?.photo)
                             .into(imgUserPp)
                     }
@@ -114,40 +113,28 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun updateData() {
-        databaseReference.child(preference.getValue("username").toString()).addValueEventListener(
-            object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val user = snapshot.getValue(User::class.java)
+        var date = userDOF.text.toString()
+        var store = userStore.text.toString()
+        var phone = userPhoneNum.text.toString()
+        var email = userEmail.text.toString()
+        var alamat = userAddress.text.toString()
+        var username = userName.text.toString()
 
-                    var date = userDOF.text.toString()
-                    var store = userStore.text.toString()
-                    var phone = userPhoneNum.toString()
-                    var email = userEmail.toString()
-                    var alamat = userAddress.toString()
-                    var username = userName.toString()
-
-                    if (username.isEmpty()){
-                        binding.etUserName.error = "Field ini kosong"
-                    } else if(email.isEmpty()){
-                        binding.etUserEmail.error = "Field ini kosong"
-                    } else if(phone.isEmpty()){
-                        binding.etUserPhone.error = "Field ini kosong"
-                    } else if(store.isEmpty()){
-                        binding.etUserStore.error = "Field ini kosong"
-                    } else if(alamat.isEmpty()){
-                        binding.etUserAddress.error = "Field ini kosong"
-                    } else if(date.isEmpty()){
-                        binding.tvUserDof.error = "Field ini kosong"
-                    } else {
-                        updateUser(username, alamat, store, email, date, phone)
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    Log.e("SettingProfileActivity", error.message)
-                }
-            }
-        )
+        if (username.isEmpty()){
+            userName.error = "Field ini kosong"
+        } else if(email.isEmpty()){
+            userEmail.error = "Field ini kosong"
+        } else if(phone.isEmpty()){
+            userPhoneNum.error = "Field ini kosong"
+        } else if(store.isEmpty()){
+            userStore.error = "Field ini kosong"
+        } else if(alamat.isEmpty()){
+            userAddress.error = "Field ini kosong"
+        } else if(date.isEmpty()){
+            userDOF.error = "Field ini kosong"
+        } else {
+            updateUser(username, alamat, store, email, date, phone)
+        }
     }
 
     private fun updateUser(
@@ -158,15 +145,24 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
         date: String,
         phone: String
     ) {
-        val user = User()
-        user.username = username
-        user.address = alamat
-        user.store = store
-        user.date = date
-        user.email = email
-        user.phone = phone
+//        val user = User()
+//        user.username = username
+//        user.address = alamat
+//        user.store = store
+//        user.date = date
+//        user.email = email
+//        user.phone = phone
 
-        databaseReference.child(preference.getValue("username").toString()).setValue(user)
+        val dataUser = hashMapOf<String, Any>(
+            "address" to alamat,
+            "date" to date,
+            "store" to store,
+            "username" to username,
+            "email" to email,
+            "phone" to phone
+        )
+
+        databaseReference.child(preference.getValue("username").toString()).updateChildren(dataUser)
             .addOnCompleteListener {
                 Toast.makeText(this, "Update data Success", Toast.LENGTH_SHORT).show()
             }
@@ -187,8 +183,8 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
                 dpd.show()
             }
 
-            R.id.btn_log_in-> {
-
+            R.id.btn_update-> {
+                updateData()
             }
             R.id.btn_back -> {
                 super.onBackPressed()
@@ -200,7 +196,6 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE){
 
-
             val imageData = data!!.getData()
             val imageName:StorageReference = storage.child("image" + imageData!!.getLastPathSegment())
 
@@ -209,10 +204,11 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
                 userProfilePict.setImageURI(data?.data)
                 imageName.getDownloadUrl().addOnSuccessListener { uri ->
                     val databaseReference: DatabaseReference =
-                        FirebaseDatabase.getInstance().getReferenceFromUrl("https://booked-me-default-rtdb.firebaseio.com/").child("profilImg")
-                    val hashMap: HashMap<String, String> = HashMap()
-                    hashMap.put("imageUrl", uri.toString())
-                    databaseReference.setValue(hashMap)
+                        FirebaseDatabase.getInstance().getReference("user").child(preference.getValue("username").toString())
+                    val hashMap: HashMap<String, Any> = hashMapOf(
+                        "photo" to uri.toString()
+                    )
+                    databaseReference.updateChildren(hashMap)
                     Toast.makeText(this,"Profile Updated", Toast.LENGTH_SHORT).show()
                 }
             }

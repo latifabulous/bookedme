@@ -18,10 +18,12 @@ import com.example.booked_me.data.User
 import com.example.booked_me.databinding.FragmentProfileBinding
 import com.example.booked_me.presentation.feeds.MyFeedsActivity
 import com.example.booked_me.presentation.login_register.LoginActivity
+import com.example.booked_me.presentation.login_register.RegisterActivity
 import com.example.booked_me.presentation.order.OrderActivity
 import com.example.booked_me.presentation.profile.SettingProfileActivity
 import com.example.booked_me.utils.Preference
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
@@ -43,6 +45,7 @@ class ProfileFragment : Fragment() {
     private lateinit var database : DatabaseReference
     private lateinit var pref : Preference
 
+    private lateinit var auth : FirebaseAuth
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -68,10 +71,12 @@ class ProfileFragment : Fragment() {
         llOrder = view.findViewById(R.id.ll_order)
         llSetting = view.findViewById(R.id.ll_setting)
 
+        auth = FirebaseAuth.getInstance()
+
         getData()
 
         btnLogout.setOnClickListener {
-            Firebase.auth.signOut()
+            auth.signOut()
             activity?.finish()
             view.context.startActivity(Intent(view.context, LoginActivity::class.java))
             Log.d("ProfileFragment", "Logout Success")
