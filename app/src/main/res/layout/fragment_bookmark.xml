@@ -57,14 +57,6 @@
                 tools:listitem="@layout/list_bookmark"/>
         </LinearLayout>
 
-<<<<<<< HEAD
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_gravity="bottom"-->
-<!--            android:gravity="bottom"-->
-<!--            android:orientation="vertical">-->
-
             <Button
                 android:id="@+id/btn_add_cart"
                 android:layout_width="match_parent"
@@ -79,30 +71,6 @@
                 android:textSize="14sp"
                 android:textAllCaps="false"
                 android:textColor="@color/white_s6"/>
-<!--        </LinearLayout>-->
-=======
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:layout_gravity="bottom"-->
-        <!--            android:gravity="bottom"-->
-        <!--            android:orientation="vertical">-->
 
-        <Button
-            android:id="@+id/btn_add_cart"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/btn_gradient"
-            android:text="Add all to cart"
-            android:layout_gravity="bottom"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/poppins_bold"
-            android:textSize="14sp"
-            android:textAllCaps="false"
-            android:textColor="@color/white_s6"/>
-        <!--        </LinearLayout>-->
->>>>>>> cd8f7b77531fbbc028228652035a54abd01bca5b
     </LinearLayout>
 </ScrollView>
