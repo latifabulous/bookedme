@@ -16,6 +16,7 @@ data class Book(
     var penulis : String? = null,
     var rating : String? = null,
     var userInput : String? = null,
+    var isBookmark : Boolean = false,
     @get:Exclude
     @set:Exclude
     var key:String? = null

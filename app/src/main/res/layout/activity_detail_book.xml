@@ -108,13 +108,14 @@
                     android:text="@string/book_details"
                     android:textColor="@color/white_s6"
                     android:textSize="18sp" />
-                <Button
+                <ImageView
                     android:id="@+id/btn_bookmark"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/btn_bookmark2_selector"/>
+                    android:src="@drawable/btn_bookmark2_selector"
+                    android:contentDescription="Bookmark" />
             </LinearLayout>
         </FrameLayout>
 

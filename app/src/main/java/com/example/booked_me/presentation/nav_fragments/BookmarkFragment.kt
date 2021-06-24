@@ -13,17 +13,6 @@ class BookmarkFragment : Fragment(), View.OnClickListener {
 
     private lateinit var btnBack : Button
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-//        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
-//            override fun handleOnBackPressed() {
-//                isEnabled = false
-//                activity?.onBackPressed()
-//            }
-//        })
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
