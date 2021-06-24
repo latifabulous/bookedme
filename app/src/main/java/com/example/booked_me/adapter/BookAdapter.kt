@@ -34,6 +34,12 @@ class BookAdapter(var context : Context, var listBook: List<Book>) : RecyclerVie
                     itemView.context.startActivity(intent)
                 }
 
+                itemView.setOnClickListener {
+                    val intent = Intent(itemView.context, DetailBookActivity::class.java)
+                    intent.putExtra("EXTRA_DATA", book)
+                    itemView.context.startActivity(intent)
+                }
+
             }
         }
     }
