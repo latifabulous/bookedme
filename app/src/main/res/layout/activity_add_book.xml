@@ -10,6 +10,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:layout_marginBottom="24dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:onClick="onClick"
+                android:background="@drawable/btn_back_brown2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="56dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:alpha=".8"
+                android:text="@string/add_book"
+                android:textColor="@color/black_s5"
+                android:textSize="18sp" />
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -30,8 +61,7 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
-                        android:src="@drawable/bg_white_dash"
-                        tools:ignore="ContentDescription" />
+                        android:src="@drawable/bg_white_dash" />
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -61,7 +91,13 @@
                 </androidx.cardview.widget.CardView>
             </FrameLayout>
         </LinearLayout>
-
+<!--        <ImageView-->
+<!--            android:id="@+id/img_book_cover"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="100dp"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            android:scaleType="fitXY"-->
+<!--            android:src="@drawable/bg_white_dash" />-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,7 +105,7 @@
             android:layout_marginLeft="20dp"
             android:textSize="12sp"
             android:layout_marginBottom="8dp"
-            android:textColor="@color/grey_s1"
+            android:textColor="@color/black_s5"
             android:fontFamily="@font/poppins_semibold"/>
 
         <EditText
@@ -96,7 +132,7 @@
             android:layout_marginLeft="20dp"
             android:textSize="12sp"
             android:layout_marginBottom="8dp"
-            android:textColor="@color/grey_s1"
+            android:textColor="@color/black_s5"
             android:fontFamily="@font/poppins_semibold"/>
 
         <EditText
@@ -112,6 +148,7 @@
             android:fontFamily="@font/poppins_semibold"
             android:inputType="text"
             android:padding="16dp"
+            android:hint="Enter book author"
             android:textColor="@color/black_s5"
             android:textSize="14dp" />
 
@@ -122,7 +159,7 @@
             android:layout_marginLeft="20dp"
             android:textSize="12sp"
             android:layout_marginBottom="8dp"
-            android:textColor="@color/grey_s1"
+            android:textColor="@color/black_s5"
             android:fontFamily="@font/poppins_semibold"/>
 
         <EditText
@@ -134,6 +171,7 @@
             android:background="@drawable/bg_input"
             android:ems="10"
             android:layout_marginRight="20dp"
+
             android:layout_marginLeft="20dp"
             android:fontFamily="@font/poppins_semibold"
             android:inputType="text"
@@ -144,15 +182,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Address"
+            android:text="Language"
             android:layout_marginLeft="20dp"
             android:textSize="12sp"
             android:layout_marginBottom="8dp"
-            android:textColor="@color/grey_s1"
+            android:textColor="@color/black_s5"
             android:fontFamily="@font/poppins_semibold"/>
 
         <EditText
-            android:id="@+id/et_book_address"
+            android:id="@+id/et_book_lang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
@@ -162,25 +200,110 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:fontFamily="@font/poppins_semibold"
-            android:inputType="text"
+            android:inputType=""
             android:padding="16dp"
             android:textColor="@color/black_s5"
             android:textSize="14dp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Number of Pages"
+            android:layout_marginLeft="20dp"
+            android:textSize="12sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/black_s5"
+            android:fontFamily="@font/poppins_semibold"/>
+
+        <EditText
+            android:id="@+id/et_book_pages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:alpha=".8"
+            android:background="@drawable/bg_input"
+            android:ems="10"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:inputType="number"
+            android:padding="16dp"
+            android:textColor="@color/black_s5"
+            android:textSize="14dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price"
+            android:layout_marginLeft="20dp"
+            android:textSize="12sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/black_s5"
+            android:fontFamily="@font/poppins_semibold"/>
+
+        <EditText
+            android:id="@+id/et_book_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:alpha=".8"
+            android:background="@drawable/bg_input"
+            android:ems="10"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:inputType="number"
+            android:padding="16dp"
+            android:textColor="@color/black_s5"
+            android:textSize="14dp" />
+        <ProgressBar
+            android:id="@+id/pb_add"
+            style="?android:progressBarStyleHorizontal"
+            android:indeterminateBehavior="cycle"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            />
         <Button
+            android:id="@+id/btn_cancel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/btn_gradient"
-            android:text="Booked Me"
+            android:background="@drawable/btn_secondary"
+            android:text="Cancel"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/poppins_bold"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="40dp"
+            android:textSize="14sp"
+            android:alpha=".8"
+            android:textAllCaps="false"
+            android:textColor="@color/black_s5"/>
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_gradient"
+            android:text="Add Book"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/poppins_bold"
             android:textSize="14sp"
             android:textAllCaps="false"
             android:textColor="@color/white_s6"/>
+
+<!--        <FrameLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="center">-->
+<!--            <ProgressBar-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                />-->
+<!--        </FrameLayout>-->
     </LinearLayout>
-
-
 </ScrollView>

@@ -38,7 +38,7 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var userStore       : EditText
     private lateinit var userAddress     : EditText
 
-    private lateinit var btnSaved        : Button
+    private lateinit var btnUpdate        : Button
     private lateinit var btnBack         : Button
     private lateinit var imageUri        : Uri
 
@@ -69,7 +69,7 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
         userStore       = findViewById(R.id.et_user_store)
         userAddress     = findViewById(R.id.et_user_address)
 
-        btnSaved        = findViewById(R.id.btn_log_in)
+        btnUpdate        = findViewById(R.id.btn_update)
         btnBack         = findViewById(R.id.btn_back)
 
         userProfilePict.setOnClickListener(this)
@@ -80,7 +80,7 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
 
         readData()
 
-        binding.btnLogIn.setOnClickListener {
+        binding.btnUpdate.setOnClickListener {
             updateData()
         }
     }
@@ -119,18 +119,18 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val user = snapshot.getValue(User::class.java)
 
-                    var date = binding.tvUserDof.text.toString()
-                    var store = binding.etUserStore.setText(user?.store).toString()
-                    var phome = binding.etUserPhone.setText(user?.phone).toString()
-                    var email = binding.etUserEmail.setText(user?.email).toString()
-                    var alamat = binding.etUserAddress.setText(user?.address).toString()
-                    var username = binding.etUserName.setText(user?.username).toString()
+                    var date = userDOF.text.toString()
+                    var store = userStore.text.toString()
+                    var phone = userPhoneNum.toString()
+                    var email = userEmail.toString()
+                    var alamat = userAddress.toString()
+                    var username = userName.toString()
 
                     if (username.isEmpty()){
                         binding.etUserName.error = "Field ini kosong"
                     } else if(email.isEmpty()){
                         binding.etUserEmail.error = "Field ini kosong"
-                    } else if(phome.isEmpty()){
+                    } else if(phone.isEmpty()){
                         binding.etUserPhone.error = "Field ini kosong"
                     } else if(store.isEmpty()){
                         binding.etUserStore.error = "Field ini kosong"
@@ -139,7 +139,7 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
                     } else if(date.isEmpty()){
                         binding.tvUserDof.error = "Field ini kosong"
                     } else {
-                        updateUser(username, alamat, store, email, date, phome)
+                        updateUser(username, alamat, store, email, date, phone)
                     }
                 }
 
@@ -156,15 +156,15 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
         store: String,
         email: String,
         date: String,
-        phome: String
+        phone: String
     ) {
         val user = User()
         user.username = username
-        user.store = store
         user.address = alamat
-        user.photo = phome
-        user.email = email
+        user.store = store
         user.date = date
+        user.email = email
+        user.phone = phone
 
         databaseReference.child(preference.getValue("username").toString()).setValue(user)
             .addOnCompleteListener {
@@ -181,14 +181,14 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.tv_user_dof -> {
                 val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener{view, mYear, mMonth, mDay ->
-                     userDOF.setText("" + mDay + "/" + mMonth + "/" + mYear)
+                    userDOF.setText("" + mDay + "/" + mMonth + "/" + mYear)
                 }, year, month, day)
 
                 dpd.show()
             }
 
             R.id.btn_log_in-> {
-                
+
             }
             R.id.btn_back -> {
                 super.onBackPressed()

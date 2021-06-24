@@ -14,25 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bookedme">
         <activity android:name=".presentation.feeds.AddBookActivity"></activity>
-        <activity android:name=".presentation.feeds.MyFeedsActivity" /> <!-- <activity android:name=".profile.SettingProfileActivity"></activity> -->
-        <!-- <activity android:name=".order.OrderDetailActivity" /> -->
-        <!-- &lt;!&ndash; <activity android:name=".SplashScreenActivity" /> &ndash;&gt; -->
-        <!-- <activity android:name=".order.OrderActivity" /> -->
-        <!-- <activity android:name=".onboarding.OnBoardingActivity" /> -->
-        <!-- <activity android:name=".CartActivity" /> -->
-        <!-- <activity android:name=".SplashScreenActivity" /> -->
-        <!-- <activity android:name=".DetailBookActivity" /> -->
-        <!-- <activity android:name=".MainActivity"> -->
+        <activity android:name=".presentation.feeds.MyFeedsActivity" />
         <activity android:name=".presentation.profile.SettingProfileActivity" />
         <activity android:name=".presentation.order.OrderDetailActivity" />
         <activity android:name=".presentation.order.OrderActivity" />
         <activity android:name=".presentation.onboarding.OnBoardingActivity" />
         <activity android:name=".presentation.CartActivity" />
         <activity android:name=".presentation.DetailBookActivity" />
-        <activity android:name=".presentation.MainActivity" />
+        <activity android:name=".presentation.SplashScreenActivity" />
         <activity android:name=".presentation.login_register.RegisterActivity" />
         <activity android:name=".presentation.login_register.LoginActivity" />
-        <activity android:name=".presentation.SplashScreenActivity">
+        <activity android:name=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

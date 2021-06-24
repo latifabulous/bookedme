@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        style="@style/CardMargin"
+        android:layout_marginLeft="20dp"
         android:layout_width="150dp"
         android:layout_height="210dp"
         app:cardCornerRadius="15dp"
@@ -28,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Laut Bercerita"
+        android:layout_marginTop="8dp"
         android:layout_marginLeft="20dp"
         android:fontFamily="@font/playfair_display_bold"
         android:textColor="@color/black_s5"
@@ -38,9 +39,8 @@
         android:id="@+id/tv_book_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Leila S. Chudori"
         android:textColor="@color/grey_s4"

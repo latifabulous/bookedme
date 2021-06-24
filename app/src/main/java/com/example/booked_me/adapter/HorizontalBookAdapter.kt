@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.example.booked_me.R
 import com.example.booked_me.data.Book
 import com.example.booked_me.databinding.ListBookBinding
+import com.squareup.picasso.Picasso
 
 class HorizontalBookAdapter(private var listBuku : List<Book>)
     : RecyclerView.Adapter<HorizontalBookAdapter.HorizontalBookViewHolder>() {
@@ -17,9 +18,10 @@ class HorizontalBookAdapter(private var listBuku : List<Book>)
             with(binding){
                 tvBookAuthor.text = book.penulis
                 tvBookTitle.text = book.judul
-                Glide.with(itemView.context)
-                    .load(book.gambar)
-                    .into(imgBookCover)
+                Picasso.get().load(book.gambar).into(imgBookCover)
+//                Glide.with(itemView.context)
+//                    .load(book.gambar)
+//                    .into(imgBookCover)
             }
         }
     }
@@ -32,10 +34,7 @@ class HorizontalBookAdapter(private var listBuku : List<Book>)
         return HorizontalBookViewHolder(view)
     }
 
-    override fun onBindViewHolder(
-        holder: HorizontalBookAdapter.HorizontalBookViewHolder,
-        position: Int
-    ) {
+    override fun onBindViewHolder(holder: HorizontalBookAdapter.HorizontalBookViewHolder, position: Int) {
         holder.bind(listBuku[position])
     }
 

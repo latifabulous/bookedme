@@ -73,6 +73,7 @@
     <string name="profile">Profile</string>
     <string name="cart">Cart</string>
     <string name="checkout_details">Checkout Details</string>
+    <string name="add_book">Add Book</string>
 
 
 </resources>
