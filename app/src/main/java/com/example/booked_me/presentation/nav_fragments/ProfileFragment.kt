@@ -1,4 +1,3 @@
-
 package com.example.booked_me.presentation.nav_fragments
 
 import android.content.Intent
@@ -27,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
 
 class ProfileFragment : Fragment() {
 
@@ -76,7 +76,10 @@ class ProfileFragment : Fragment() {
         getData()
 
         btnLogout.setOnClickListener {
-            auth.signOut()
+//            auth.signOut()
+
+            pref.logout()
+            Firebase.auth.signOut()
             activity?.finish()
             view.context.startActivity(Intent(view.context, LoginActivity::class.java))
             Log.d("ProfileFragment", "Logout Success")
@@ -150,10 +153,9 @@ class ProfileFragment : Fragment() {
                 val user = snapshot.getValue(User::class.java)
 
                 with(binding){
-                    Glide.with(requireContext())
-                            .load(user?.photo)
-                            .circleCrop()
-                            .into(imgUserPp)
+                    Picasso.get()
+                        .load(user?.photo)
+                        .into(imgUserPp)
 
                     tvStore.setText(user?.store)
                     tvUsername.setText(user?.username)
@@ -161,7 +163,7 @@ class ProfileFragment : Fragment() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                Log.e("ProfileFragment", error.message)
             }
 
         })

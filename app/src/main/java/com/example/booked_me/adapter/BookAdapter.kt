@@ -28,6 +28,11 @@ class BookAdapter(var context : Context, var listBook: List<Book>) : RecyclerVie
 //                Glide.with(itemView.context)
 //                    .load(book.gambar)
 //                    .into(imgBookCover)
+                itemView.setOnClickListener {
+                    val intent = Intent(itemView.context, DetailBookActivity::class.java)
+                    intent.putExtra("EXTRA_DATA", book)
+                    itemView.context.startActivity(intent)
+                }
 
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailBookActivity::class.java)
