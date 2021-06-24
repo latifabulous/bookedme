@@ -132,4 +132,4 @@ class DetailBookActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-} 
+}
