@@ -98,19 +98,19 @@ class RegisterActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val user = snapshot.getValue(User::class.java)
 
-//                if (user == null){
-//                    firebase.child(username).setValue(dataUser)
-//                    Toast.makeText(this@RegisterActivity, "Register Success", Toast.LENGTH_SHORT).show()
-//                    startActivity(Intent(this@RegisterActivity,LoginActivity::class.java))
-//                } else
-
                 if (snapshot.getChildrenCount()>0){
                     binding.etUname.error = "Username already taken"
                     binding.etUname.requestFocus()
 //                    Toast.makeText(this@RegisterActivity, "Username already taken", Toast.LENGTH_SHORT).show()
+//                if (user == null){
+//                    firebase.child(username).setValue(dataUser)
+//                    Toast.makeText(this@RegisterActivity, "Register Success", Toast.LENGTH_SHORT).show()
+//                    finish()
+//                    startActivity(Intent(this@RegisterActivity,LoginActivity::class.java))
                 } else {
                     firebase.child(username).setValue(dataUser)
                     Toast.makeText(this@RegisterActivity, "Register Success", Toast.LENGTH_SHORT).show()
+                    finish()
                     startActivity(Intent(this@RegisterActivity,LoginActivity::class.java))
 
 //                    Toast.makeText(this@RegisterActivity, "User has been added", Toast.LENGTH_SHORT).show()

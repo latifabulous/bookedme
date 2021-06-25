@@ -19,13 +19,14 @@
         <activity android:name=".presentation.profile.SettingProfileActivity" />
         <activity android:name=".presentation.order.OrderDetailActivity" />
         <activity android:name=".presentation.order.OrderActivity" />
-        <activity android:name=".presentation.onboarding.OnBoardingActivity" />
         <activity android:name=".presentation.CartActivity" />
         <activity android:name=".presentation.DetailBookActivity" />
-        <activity android:name=".presentation.SplashScreenActivity" />
-        <activity android:name=".presentation.MainActivity" />
+        <activity android:name=".presentation.MainActivity"/>
+        <activity android:name=".presentation.login_register.RegisterActivity" />
         <activity android:name=".presentation.login_register.LoginActivity" />
-        <activity android:name=".presentation.login_register.RegisterActivity">
+        <activity android:name=".presentation.onboarding.OnBoardingActivity" />
+        <activity android:name=".presentation.SplashScreenActivity" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -77,7 +77,6 @@ class ProfileFragment : Fragment() {
 
         btnLogout.setOnClickListener {
 //            auth.signOut()
-
             pref.logout()
             Firebase.auth.signOut()
             activity?.finish()

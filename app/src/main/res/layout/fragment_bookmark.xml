@@ -38,12 +38,12 @@
                 android:textColor="@color/black_s5"
                 android:textSize="18sp" />
             <Button
-                android:id="@+id/btn_bookmark"
+                android:id="@+id/btn_delete"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/btn_menu_brown2"/>
+                android:background="@drawable/ic_baseline_delete_24"/>
         </LinearLayout>
 
         <LinearLayout
@@ -72,5 +72,22 @@
             android:textSize="14sp"
             android:textAllCaps="false"
             android:textColor="@color/white_s6"/>
+<!--=======-->
+<!--            <Button-->
+<!--                android:id="@+id/btn_add_cart"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="@drawable/btn_gradient"-->
+<!--                android:text="Add all to cart"-->
+<!--                android:layout_gravity="bottom"-->
+<!--                android:layout_marginLeft="20dp"-->
+<!--                android:layout_marginRight="20dp"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:fontFamily="@font/poppins_bold"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:textColor="@color/white_s6"/>-->
+
+<!--&gt;>>>>>> b065c59f92576f9e641108eb9b14a00cec99a305-->
     </LinearLayout>
 </ScrollView>

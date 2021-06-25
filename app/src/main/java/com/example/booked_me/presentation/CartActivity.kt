@@ -8,6 +8,7 @@ import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.example.booked_me.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
@@ -19,8 +20,6 @@ class CartActivity : AppCompatActivity(),
     private lateinit var hargaBayar : LinearLayout
     private lateinit var sheetBehavior : BottomSheetBehavior<LinearLayout>
 
-    private lateinit var addBook : ImageView
-    private lateinit var minusBook : ImageView
     private lateinit var bottomSheetArrow : ImageView
     private lateinit var sumBook : TextView
 
@@ -30,8 +29,6 @@ class CartActivity : AppCompatActivity(),
 
         bottomSheet = findViewById(R.id.bottom_sheet)
         gestureLayout = findViewById(R.id.gesture_layout)
-        addBook = findViewById(R.id.add_sum)
-        minusBook = findViewById(R.id.minus_sum)
         bottomSheetArrow = findViewById(R.id.bottom_sheet_arrow)
         sumBook = findViewById(R.id.sum_book)
         sheetBehavior = BottomSheetBehavior.from(bottomSheet)
@@ -81,9 +78,6 @@ class CartActivity : AppCompatActivity(),
             override fun onSlide(bottomSheet: View, slideOffset: Float) {}
 
         })
-
-        addBook.setOnClickListener(this)
-        minusBook.setOnClickListener(this)
 
     }
 

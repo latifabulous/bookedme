@@ -1,7 +1,9 @@
 package com.example.booked_me.presentation.nav_fragments
 
+import android.app.AlertDialog
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,33 +13,45 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.booked_me.presentation.CheckoutDetailFragment
 import com.example.booked_me.R
+import com.example.booked_me.data.Transaksi
+import com.example.booked_me.presentation.nav_fragments.adapter.CartAdapter
+import com.example.booked_me.utils.Preference
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.firebase.database.*
+import org.w3c.dom.Text
 
-class CartFragment : Fragment(), View.OnClickListener {
+class CartFragment : Fragment() {
 
     private lateinit var bottomSheet : LinearLayout
     private lateinit var gestureLayout : LinearLayout
     private lateinit var hargaBayar : LinearLayout
     private lateinit var sheetBehavior : BottomSheetBehavior<LinearLayout>
 
-    private lateinit var addBook : ImageView
-    private lateinit var minusBook : ImageView
     private lateinit var bottomSheetArrow : ImageView
-    private lateinit var sumBook : TextView
+    private lateinit var harga : TextView
+    private lateinit var totalHarga : TextView
+    private lateinit var subOder : TextView
+    private lateinit var subHarga : TextView
 
     private lateinit var btnCheckout : Button
     private lateinit var btnCheckoutSwipe : Button
+    private lateinit var btnDelete : Button
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private lateinit var rvCart : RecyclerView
 
-    }
+    private lateinit var database : DatabaseReference
+    private lateinit var preference: Preference
+
+    private lateinit var listCart : ArrayList<Transaksi>
+    private var totalBayar : Int = 0
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_cart, container, false)
@@ -46,34 +60,46 @@ class CartFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        preference = Preference(view.context)
+        database = FirebaseDatabase.getInstance().getReference("user")
+
+        listCart = ArrayList()
+
+        subHarga = view.findViewById(R.id.sub_harga)
+        harga = view.findViewById(R.id.harga)
+        totalHarga = view.findViewById(R.id.total_harga)
+        subOder = view.findViewById(R.id.sub_order)
+        btnDelete = view.findViewById(R.id.btn_delete)
+
         bottomSheet = view.findViewById(R.id.bottom_sheet)
         gestureLayout = view.findViewById(R.id.gesture_layout)
-        addBook = view.findViewById(R.id.add_sum)
-        minusBook = view.findViewById(R.id.minus_sum)
         bottomSheetArrow = view.findViewById(R.id.bottom_sheet_arrow)
-        sumBook = view.findViewById(R.id.sum_book)
         sheetBehavior = BottomSheetBehavior.from(bottomSheet)
         hargaBayar = view.findViewById(R.id.harga_bayar)
         btnCheckout = view.findViewById(R.id.btn_checkout)
         btnCheckoutSwipe = view.findViewById(R.id.btn_checkout_swipe)
+        rvCart = view.findViewById(R.id.rv_cart)
 
-        btnCheckout.setOnClickListener(this)
-        btnCheckoutSwipe.setOnClickListener(this)
+        btnDelete.setOnClickListener{
+            deleteBookmark()
+        }
 
+        getDataCart()
+        rvCart.layoutManager = LinearLayoutManager(view.context)
         gestureLayout.viewTreeObserver.also {
             it.addOnGlobalLayoutListener(
-                object : ViewTreeObserver.OnGlobalLayoutListener {
-                    override fun onGlobalLayout() {
-                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                            gestureLayout.viewTreeObserver.removeGlobalOnLayoutListener(this)
-                        } else {
-                            gestureLayout.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    object : ViewTreeObserver.OnGlobalLayoutListener {
+                        override fun onGlobalLayout() {
+                            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                                gestureLayout.viewTreeObserver.removeGlobalOnLayoutListener(this)
+                            } else {
+                                gestureLayout.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                            }
+                            //                int width = bottomSheetLayout.getMeasuredWidth();
+                            val height = gestureLayout.measuredHeight
+                            sheetBehavior.peekHeight = height
                         }
-                        //                int width = bottomSheetLayout.getMeasuredWidth();
-                        val height = gestureLayout.measuredHeight
-                        sheetBehavior.peekHeight = height
-                    }
-                })
+                    })
         }
 
         sheetBehavior.isHideable = false
@@ -104,46 +130,75 @@ class CartFragment : Fragment(), View.OnClickListener {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {}
 
         })
-
-        addBook.setOnClickListener(this)
-        minusBook.setOnClickListener(this)
-
     }
 
-     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.add_sum -> {
-                var count = sumBook.text.toString().trim()
-                var numberBook = Integer.parseInt(count)
-                if (numberBook >= 9) return
-                numberBook++
-                sumBook.text = numberBook.toString()
-            }
-            R.id.minus_sum -> {
-                var count = sumBook.text.toString().trim()
-                var numberBook = Integer.parseInt(count)
-                if (numberBook == 1) return
-                numberBook--
-                sumBook.text = numberBook.toString()
-            }
-            R.id.btn_checkout -> {
-                val checkoutDetailFragment = CheckoutDetailFragment()
+    private fun getDataCart() {
+        database.child(preference.getValue("username").toString()).child("cart_user")
+                .addValueEventListener( object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        listCart.clear()
+                        for (carts in snapshot.children){
+                            val cart = carts.getValue(Transaksi::class.java)
+                            listCart.add(cart!!)
 
-                fragmentManager?.beginTransaction()?.apply {
-                    replace(R.id.fl_wrapper, checkoutDetailFragment, CheckoutDetailFragment::class.java.simpleName)
-                    addToBackStack(null)
-                    commit()
-                }
-            }
-            R.id.btn_checkout_swipe -> {
-                val checkoutDetailFragment = CheckoutDetailFragment()
+                            totalBayar += cart.harga?.toInt()!!
+                        }
 
-                fragmentManager?.beginTransaction()?.apply {
-                    replace(R.id.fl_wrapper, checkoutDetailFragment, CheckoutDetailFragment::class.java.simpleName)
-                    addToBackStack(null)
-                    commit()
-                }
-            }
+                        val adminFee = 2000
+                        var price : Int = adminFee + totalBayar
+
+
+                        subHarga.text = "Rp. $totalBayar"
+                        subOder.text = "Rp. $adminFee"
+                        totalHarga.text = "Rp. $price"
+                        harga.text = "Rp. $price"
+
+                        rvCart.adapter = CartAdapter(listCart)
+
+
+
+                        btnCheckout.setOnClickListener {
+                            val checkoutFragment = CheckoutDetailFragment()
+
+                            val bundle = Bundle()
+                            bundle.putString("EXTRA_PRICE", price.toString())
+                            bundle.putString("EXTRA_SUB_PRICE", totalBayar.toString())
+                            Log.d("CartFragment", totalBayar.toString())
+                            checkoutFragment.arguments = bundle
+
+                            fragmentManager?.beginTransaction()
+                                    ?.replace(R.id.fl_wrapper, checkoutFragment, CheckoutDetailFragment::class.java.simpleName)
+                                    ?.commit()
+                        }
+                        btnCheckoutSwipe.setOnClickListener {
+                            val checkoutFragment = CheckoutDetailFragment()
+                            val bundle = Bundle()
+                            bundle.putString("EXTRA_PRICE", price.toString())
+                            bundle.putString("EXTRA_SUB_PRICE", totalBayar.toString())
+                            checkoutFragment.arguments = bundle
+
+                            fragmentManager?.beginTransaction()
+                                    ?.replace(R.id.fl_wrapper, checkoutFragment, CheckoutDetailFragment::class.java.simpleName)
+                                    ?.commit()
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Log.e("CartFragment", error.message)
+                    }
+                })
+    }
+
+    private fun deleteBookmark() {
+        val alertDialog = AlertDialog.Builder(view?.context)
+        alertDialog.setTitle("Are you sure to delete this?")
+        alertDialog.setPositiveButton("Yes") { dialog, which ->
+            database.child(preference.getValue("username").toString())
+                    .child("cart_user").removeValue()
         }
+        alertDialog.setNegativeButton("No") { dialog, which ->
+            dialog.dismiss()
+        }
+        alertDialog.create().show()
     }
 }

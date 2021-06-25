@@ -180,6 +180,7 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
                 )
                 dpd.show()
             }
+
             R.id.btn_update -> {
                 updateData()
             }
@@ -191,21 +192,18 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
 
             val imageData = data!!.getData()
-            val imageName: StorageReference =
-                storage.child("image" + imageData!!.getLastPathSegment())
+            val imageName: StorageReference = storage.child("image" + imageData!!.getLastPathSegment())
 
 
             imageName.putFile(imageData).addOnSuccessListener {
                 userProfilePict.setImageURI(data?.data)
                 imageName.getDownloadUrl().addOnSuccessListener { uri ->
                     val databaseReference: DatabaseReference =
+                        FirebaseDatabase.getInstance().getReference("user").child(preference.getValue("username").toString())
 
-                        FirebaseDatabase.getInstance().getReference("user")
-                            .child(preference.getValue("username").toString())
                     val hashMap: HashMap<String, Any> = hashMapOf(
                         "photo" to uri.toString()
                     )
