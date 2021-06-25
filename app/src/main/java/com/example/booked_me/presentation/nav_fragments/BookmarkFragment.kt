@@ -131,10 +131,10 @@ class BookmarkFragment : Fragment(), View.OnClickListener {
 
                                             val transaksi = Transaksi()
                                             transaksi.user = user?.username
-                                            transaksi.alamat_user = user?.address
+                                            transaksi.address_user = user?.address
                                             transaksi.phone = user?.phone
-                                            transaksi.harga = book?.harga
-                                            transaksi.judul_buku = book?.judul
+                                            transaksi.price = book?.harga
+                                            transaksi.title_buku = book?.judul
                                             transaksi.date = currentDate.toString()
                                             transaksi.gambar = book?.gambar
 
