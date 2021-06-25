@@ -109,7 +109,7 @@ class BookmarkFragment : Fragment(), View.OnClickListener {
                                             transaksi.address_user = user?.address
                                             transaksi.phone = user?.phone
                                             transaksi.price = book?.harga
-                                            transaksi.judul_buku = book?.judul
+                                            transaksi.title_book = book?.judul
                                             transaksi.date = currentDate.toString()
                                             transaksi.gambar = book?.gambar
 

@@ -71,7 +71,7 @@ class CheckoutDetailFragment : Fragment() {
                         var orderData = Order()
                         orderData.gambar = order.gambar
                         orderData.harga = order.price
-                        orderData.judul_buku = order.judul_buku
+                        orderData.judul_buku = order.title_book
                         orderData.date = currentDate.toString()
                         orderData.status = "Belum Bayar"
 

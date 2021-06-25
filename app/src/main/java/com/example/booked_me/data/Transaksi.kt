@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Transaksi(
-    var judul_buku : String? = null,
+    var title_book : String? = null,
     var price : String? = null,
     var user : String? = null,
     var phone : String? = null,
