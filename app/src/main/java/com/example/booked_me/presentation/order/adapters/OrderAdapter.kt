@@ -15,7 +15,7 @@ class OrderAdapter(private val listOrder : List<Transaksi>)
         private var binding = ListOrderBinding.bind(itemView)
 
         fun bind(transaksi: Transaksi){
-            binding.tvBookAuthor.text = "transaksi.judul_buku"
+            binding.tvBookAuthor.text = "transaksi.title_book"
             binding.tvBookPrice.text = transaksi.price
             Picasso.get()
                 .load(transaksi.gambar)
