@@ -68,15 +68,15 @@ class CheckoutDetailFragment : Fragment() {
 
                             var orderData = Order()
                             orderData.gambar = order.gambar
-                            orderData.harga = order.price
-                            orderData.judul_buku = order.title_buku
+                            orderData.harga = order.harga
+                            orderData.judul_buku = order.judul_buku
                             orderData.date = currentDate.toString()
                             orderData.status = "Belum Bayar"
 
                             //show data
                             binding.tvUsername.text = order.user
                             binding.tvUserTlp.text = order.phone
-                            binding.tvAddress.text = order.address_user
+                            binding.tvAddress.text = order.alamat_user
                             binding.tvAdminFee.text = "Rp. 2000"
                             binding.tvUserTotalPrice.text = "Rp. $subBayar"
                             binding.tvUserTotalPay.text = "Rp. $totalBayar"
