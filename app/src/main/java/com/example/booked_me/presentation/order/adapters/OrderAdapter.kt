@@ -16,7 +16,7 @@ class OrderAdapter(private val listOrder : List<Transaksi>)
 
         fun bind(transaksi: Transaksi){
             binding.tvBookAuthor.text = "transaksi.judul_buku"
-            binding.tvBookPrice.text = transaksi.harga
+            binding.tvBookPrice.text = transaksi.price
             Picasso.get()
                 .load(transaksi.gambar)
                 .into(binding.imgBookCover)

@@ -58,11 +58,6 @@ class BookmarkFragment : Fragment(), View.OnClickListener {
         btnAddCart.setOnClickListener(this)
         listBuku = ArrayList<Book>()
 
-//        listBuku.clear()
-//        if (listBuku.isEmpty()){
-//            btnAddCart.visibility = View.GONE
-//        }
-
         getBookmark()
 
         rvBookmark.layoutManager = LinearLayoutManager(view.context)
@@ -111,9 +106,9 @@ class BookmarkFragment : Fragment(), View.OnClickListener {
 
                                             val transaksi = Transaksi()
                                             transaksi.user = user?.username
-                                            transaksi.alamat_user = user?.address
+                                            transaksi.address_user = user?.address
                                             transaksi.phone = user?.phone
-                                            transaksi.harga = book?.harga
+                                            transaksi.price = book?.harga
                                             transaksi.judul_buku = book?.judul
                                             transaksi.date = currentDate.toString()
                                             transaksi.gambar = book?.gambar
@@ -124,10 +119,6 @@ class BookmarkFragment : Fragment(), View.OnClickListener {
                                                     Toast.makeText(view?.context, "Add to Cart to Success", Toast.LENGTH_SHORT).show()
                                                 }
 
-////                                            transaksi.status = "Belum Bayar"
-//
-//                                            database.child(preference.getValue("username").toString())
-//                                                .child("cart_user").child(book?.judul.toString()).setValue(transaksi)
 
                                         }
                                     }

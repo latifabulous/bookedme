@@ -134,7 +134,7 @@ class CartFragment : Fragment() {
                         val cart = carts.getValue(Transaksi::class.java)
                         listCart.add(cart!!)
 
-                        totalBayar += cart.harga?.toInt()!!
+                        totalBayar += cart.price?.toInt()!!
                     }
 
                     val adminFee = 2000
