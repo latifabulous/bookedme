@@ -112,15 +112,61 @@
                 android:textColor="@color/black_s5"
                 android:alpha=".8"
                 android:fontFamily="@font/poppins_semibold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="bottom"
+                    android:src="@drawable/bni"/>
+
+                <TextView
+                    android:id="@+id/tv_book_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:alpha=".8"
+                    android:layout_marginLeft="8dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Bank Transfer"
+                    android:textColor="@color/black_s5"
+                    android:textSize="16sp" />
+            </LinearLayout>
             <TextView
-                android:id="@+id/tv_book_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bank Transfer"
+                android:text="Nomor Rekening"
                 android:textSize="12sp"
-                android:layout_marginTop="16dp"
-                android:textColor="@color/grey_s1"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/grey_s4"
                 android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5201096107000001"
+                android:textSize="24sp"
+                android:textColor="@color/brown_2"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Atas Nama"
+                android:textSize="12sp"
+                android:textColor="@color/grey_s4"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BookedMe"
+                android:textSize="24sp"
+                android:textColor="@color/brown_2"
+                android:fontFamily="@font/poppins_bold"
                 android:gravity="center"/>
         </LinearLayout>
 
@@ -246,7 +292,7 @@
                 android:text="Booked Me"
                 android:layout_marginBottom="24dp"
                 android:fontFamily="@font/poppins_bold"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="72dp"
                 android:textSize="14sp"
                 android:textAllCaps="false"
                 android:textColor="@color/white_s6"/>
