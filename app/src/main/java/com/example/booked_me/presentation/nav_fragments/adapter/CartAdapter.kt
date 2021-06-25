@@ -17,8 +17,8 @@ class CartAdapter(private val listCart : List<Transaksi>) : RecyclerView.Adapter
 
         fun bind(transaksi: Transaksi){
             with(binding){
-                tvBookTitle.text = transaksi.judul_buku
-                tvHarga.text = "Rp. ${transaksi.harga}"
+                tvBookTitle.text = transaksi.title_buku
+                tvHarga.text = "Rp. ${transaksi.price}"
 
                 Picasso.get()
                         .load(transaksi.gambar)
