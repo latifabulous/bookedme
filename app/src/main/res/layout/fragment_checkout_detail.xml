@@ -296,6 +296,7 @@
             android:textSize="14sp"
             android:textAllCaps="false"
             android:textColor="@color/white_s6"/>
+
     </LinearLayout>
 
 </ScrollView>

@@ -95,12 +95,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         } else if(password.isEmpty()){
             binding.etPassword.error = "Password is required"
             binding.etPassword.requestFocus()
-        } else if (password.length < 6 ){
-            binding.etPassword.error = "Must be 6-12 characters"
-            binding.etPassword.requestFocus()
-        } else if (password.length > 12 ){
-            binding.etPassword.error = "Must be 6-12 characters"
-            binding.etPassword.requestFocus()
         } else {
             login(username, password)
         }
