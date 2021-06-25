@@ -61,32 +61,32 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
-                        android:src="@drawable/bg_white_dash" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:orientation="vertical">
-                        <TextView
-                            android:gravity="center"
-                            android:layout_gravity="center"
-                            android:layout_width="37dp"
-                            android:layout_height="37dp"
-                            android:backgroundTint="@color/grey_s2"
-                            android:background="@drawable/ic_plus"/>
-                        <TextView
-                            android:id="@+id/tv_book_author"
-                            android:gravity="center"
-                            android:layout_gravity="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="24dp"
-                            android:padding="8dp"
-                            android:fontFamily="@font/poppins_medium"
-                            android:text="Click here to upload image"
-                            android:textColor="@color/grey_s2"
-                            android:textSize="10sp" />
-                    </LinearLayout>
+                        android:src="@drawable/bg_up_img" />
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:orientation="vertical">-->
+<!--                        <TextView-->
+<!--                            android:gravity="center"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:layout_width="37dp"-->
+<!--                            android:layout_height="37dp"-->
+<!--                            android:backgroundTint="@color/grey_s2"-->
+<!--                            android:background="@drawable/ic_plus"/>-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_book_author"-->
+<!--                            android:gravity="center"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="24dp"-->
+<!--                            android:padding="8dp"-->
+<!--                            android:fontFamily="@font/poppins_medium"-->
+<!--                            android:text="Click here to upload image"-->
+<!--                            android:textColor="@color/grey_s2"-->
+<!--                            android:textSize="10sp" />-->
+<!--                    </LinearLayout>-->
 
                 </androidx.cardview.widget.CardView>
             </FrameLayout>
@@ -168,10 +168,11 @@
             android:layout_height="150dp"
             android:layout_marginBottom="15dp"
             android:alpha=".8"
+            android:gravity="top"
             android:background="@drawable/bg_input"
             android:ems="10"
             android:layout_marginRight="20dp"
-
+            android:hint="Tell what the book is about"
             android:layout_marginLeft="20dp"
             android:fontFamily="@font/poppins_semibold"
             android:inputType="text"
@@ -200,7 +201,8 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:fontFamily="@font/poppins_semibold"
-            android:inputType=""
+            android:inputType="text"
+            android:hint="Enter book language"
             android:padding="16dp"
             android:textColor="@color/black_s5"
             android:textSize="14dp" />
@@ -223,6 +225,7 @@
             android:alpha=".8"
             android:background="@drawable/bg_input"
             android:ems="10"
+            android:hint="Number of pages"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:fontFamily="@font/poppins_semibold"
@@ -249,6 +252,7 @@
             android:alpha=".8"
             android:background="@drawable/bg_input"
             android:ems="10"
+            android:hint="Enter book price"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:fontFamily="@font/poppins_semibold"

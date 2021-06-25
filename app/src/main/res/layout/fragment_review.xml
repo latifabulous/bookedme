@@ -8,6 +8,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
@@ -78,6 +81,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -136,13 +140,70 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="Nunikyuni"
+                    android:text="AisyahNisa"
+                    android:layout_marginLeft="8dp"
+                    android:alpha="0.8"
+                    android:textColor="@color/black_s5"
+                    android:textSize="14sp"/>
+
+                <RatingBar
+                    style="@android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:numStars="5"
+                    android:rating="4.5"
+                    android:stepSize="0.5"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="5dp"
+                    android:scaleX="0.4"
+                    android:scaleY="0.4"
+                    android:isIndicator="false"
+                    android:progressTint="#F1C644"
+                    android:layout_marginLeft="8dp"
+                    android:secondaryProgressTint="#F1C644"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="-25dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/lorem"
+                    android:textColor="@color/grey_s1"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:gravity="left">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:src="@drawable/jw"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Latifabulous"
                     android:layout_marginLeft="8dp"
                     android:alpha="0.8"
                     android:textColor="@color/black_s5"

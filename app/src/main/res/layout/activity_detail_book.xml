@@ -232,19 +232,9 @@
                 app:tabTextAppearance="@style/TabLayout"
                 />
 
-<!--            app:tabMode="fixed"-->
-<!--            app:tabGravity="fill"-->
-
-            <!--        android:background="@color/white_s6"-->
-            <!--        app:tabBackground="@color/white_s6"-->
-
-            <!--        app:tabRippleColor="@color/brown_2"-->
-            <!--        app:tabInlineLabel="true"-->
-
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 

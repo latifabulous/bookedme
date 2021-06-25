@@ -1,23 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".presentation.feeds.MyFeedsActivity">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_float_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_gravity="bottom|right"
-        android:backgroundTint="@color/green_1"
-        android:src="@drawable/ic_plus"
-        android:tint="@color/brown_4"
-        app:borderWidth="0dp">
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
-</ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:onClick="onClick"
+                android:background="@drawable/btn_back_green"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:alpha=".8"
+                android:text="@string/my_feed"
+                android:textColor="@color/black_s5"
+                android:textSize="18sp" />
+            <Button
+                android:id="@+id/btn_bookmark"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/btn_menu_green"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:orientation="vertical">
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_float_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:alpha=".7"
+                android:layout_gravity="end"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="@color/green_1"
+                android:src="@drawable/ic_plus"
+                android:tint="@color/white_s6"
+                app:borderWidth="0dp">
+            </com.google.android.material.floatingactionbutton.FloatingActionButton>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

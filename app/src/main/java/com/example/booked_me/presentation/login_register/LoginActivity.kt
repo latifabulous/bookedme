@@ -90,15 +90,20 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         var password = binding.etPassword.text.toString()
 
         if (username.isEmpty()){
-            binding.etUsername.error = "Email anda kosong"
+            binding.etUsername.error = "Username is required"
             binding.etUsername.requestFocus()
-        } else if(password.isEmpty() || password.length < 6){
-            binding.etPassword.error = "Password should more than 6 characters"
-        }
-            else {
+        } else if(password.isEmpty()){
+            binding.etPassword.error = "Password is required"
+            binding.etPassword.requestFocus()
+        } else if (password.length < 6 ){
+            binding.etPassword.error = "Must be 6-12 characters"
+            binding.etPassword.requestFocus()
+        } else if (password.length > 12 ){
+            binding.etPassword.error = "Must be 6-12 characters"
+            binding.etPassword.requestFocus()
+        } else {
             login(username, password)
         }
-
     }
     private fun login(username:String, password:String){
         firebase.child(username).addValueEventListener(object: ValueEventListener {
@@ -113,11 +118,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
                     Log.d("LoginActivity", user.toString())
                     if (username == user.username && password == user.password){
-                        Toast.makeText(this@LoginActivity, "Login Berhasil", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LoginActivity, "Login Success", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
 
                     } else {
-                        Toast.makeText(this@LoginActivity, "Login Gagal", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LoginActivity, "Login Failed", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

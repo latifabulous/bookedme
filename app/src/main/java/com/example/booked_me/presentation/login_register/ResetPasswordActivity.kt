@@ -31,10 +31,10 @@ class ResetPasswordActivity : AppCompatActivity() {
             val email = etEmail.text.toString().trim()
 
             if(email.isEmpty()) {
-                etEmail.error = "Fill email"
+                etEmail.error = "Email adress is required"
                 etEmail.requestFocus()
             } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                etEmail.error = "Email invalid"
+                etEmail.error = "Invalid email"
                 etEmail.requestFocus()
             } else {
                 FirebaseAuth.getInstance().sendPasswordResetEmail(email).addOnCompleteListener {

@@ -194,7 +194,7 @@ class AddBookActivity : AppCompatActivity(), View.OnClickListener {
                     databaseReference!!.child((judul)!!).setValue(buku)
                     pbAdd.visibility = View.INVISIBLE
 
-                    Toast.makeText(this@AddBookActivity, "Sukses", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@AddBookActivity, "Book has been added", Toast.LENGTH_LONG).show()
 
                     openImageActivity()
                 }

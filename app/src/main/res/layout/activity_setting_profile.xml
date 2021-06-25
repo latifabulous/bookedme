@@ -24,7 +24,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:onClick="onClick"
-                android:background="@drawable/btn_back_brown2"/>
+                android:background="@drawable/btn_back_green"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -34,7 +34,7 @@
                 android:gravity="center"
                 android:layout_weight="1"
                 android:alpha=".8"
-                android:text="@string/profile"
+                android:text="Setting Profile"
                 android:textColor="@color/black_s5"
                 android:textSize="18sp" />
             <Button
@@ -43,7 +43,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/btn_menu_brown2"/>
+                android:background="@drawable/btn_menu_green"/>
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -83,7 +83,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Store"
+            android:text="Username"
             android:textSize="12sp"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="8dp"

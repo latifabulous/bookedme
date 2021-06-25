@@ -28,6 +28,9 @@ class MyFeedsActivity : AppCompatActivity(), View.OnClickListener {
                 val feedIntent = Intent(this@MyFeedsActivity, AddBookActivity::class.java)
                 startActivity(feedIntent)
             }
+            R.id.btn_back -> {
+                super.onBackPressed()
+            }
         }
     }
 

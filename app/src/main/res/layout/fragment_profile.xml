@@ -25,7 +25,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:onClick="onClick"
-                android:background="@drawable/btn_back_brown2"/>
+                android:background="@drawable/btn_back_green"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -44,7 +44,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/btn_menu_brown2"/>
+                android:background="@drawable/btn_menu_green"/>
         </LinearLayout>
 
         <de.hdodenhof.circleimageview.CircleImageView

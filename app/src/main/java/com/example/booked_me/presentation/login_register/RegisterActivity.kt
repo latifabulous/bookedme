@@ -67,16 +67,23 @@ class RegisterActivity : AppCompatActivity() {
         var password = binding.etPassword.text.toString()
 
         if(username.isEmpty()){
-            binding.etUname.error = "Fill username"
+            binding.etUname.error = "Username is required"
             binding.etUname.requestFocus()
         } else if(email.isEmpty()){
-            binding.etEmail.error = "Fill email"
+            binding.etEmail.error = "Email address is required"
             binding.etEmail.requestFocus()
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            binding.etEmail.error = "Email invalid"
+            binding.etEmail.error = "Invalid email address"
             binding.etEmail.requestFocus()
-        } else if(password.isEmpty() || password.length < 6){
-            binding.etPassword.error = "Password invalid"
+        } else if(password.isEmpty()){
+            binding.etPassword.error = "Password is required"
+            binding.etPassword.requestFocus()
+        } else if (password.length < 6 ){
+            binding.etPassword.error = "Must be 6-12 characters"
+            binding.etPassword.requestFocus()
+        } else if (password.length > 12 ){
+            binding.etPassword.error = "Must be 6-12 characters"
+            binding.etPassword.requestFocus()
         } else {
             register(username, email, password)
         }
@@ -85,21 +92,29 @@ class RegisterActivity : AppCompatActivity() {
     private fun register(username: String, email: String, password: String) {
 //
         val dataUser = User(username = username, email = email, password = password)
+        val query = firebase.orderByChild("username").equalTo(username)
 
-        firebase.child(username).addValueEventListener( object : ValueEventListener {
+        query.addValueEventListener( object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val user = snapshot.getValue(User::class.java)
 
-                if (user == null){
-                    firebase.child(username).setValue(dataUser)
+//                if (user == null){
+//                    firebase.child(username).setValue(dataUser)
+//                    Toast.makeText(this@RegisterActivity, "Register Success", Toast.LENGTH_SHORT).show()
+//                    startActivity(Intent(this@RegisterActivity,LoginActivity::class.java))
+//                } else
 
-
-                    Toast.makeText(this@RegisterActivity, "Register Success", Toast.LENGTH_SHORT).show()
+                if (snapshot.getChildrenCount()>0){
+                    binding.etUname.error = "Username already taken"
+                    binding.etUname.requestFocus()
+//                    Toast.makeText(this@RegisterActivity, "Username already taken", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(this@RegisterActivity, "User has been added", Toast.LENGTH_SHORT).show()
-
+                    firebase.child(username).setValue(dataUser)
+                    Toast.makeText(this@RegisterActivity, "Register Success", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@RegisterActivity,LoginActivity::class.java))
 
+//                    Toast.makeText(this@RegisterActivity, "User has been added", Toast.LENGTH_SHORT).show()
+//                    startActivity(Intent(this@RegisterActivity,LoginActivity::class.java))
                 }
             }
 

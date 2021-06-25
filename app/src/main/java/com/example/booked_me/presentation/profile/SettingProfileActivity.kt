@@ -120,30 +120,18 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
         var alamat = userAddress.text.toString()
         var username = userName.text.toString()
 
-//        if (username.isEmpty()){
-//            userName.error = "Field ini kosong"
-//        } else if(email.isEmpty()){
-//            userEmail.error = "Field ini kosong"
-//        } else if(phone.isEmpty()){
-//            userPhoneNum.error = "Field ini kosong"
-//        } else if(store.isEmpty()){
-//            userStore.error = "Field ini kosong"
-//        } else if(alamat.isEmpty()){
-//            userAddress.error = "Field ini kosong"
-//        } else if(date.isEmpty()){
-
         if (username.isEmpty()) {
-            userName.error = "Field ini kosong"
+            userName.error = "field cannot be empty"
         } else if (email.isEmpty()) {
-            userEmail.error = "Field ini kosong"
+            userEmail.error = "field cannot be empty"
         } else if (phone.isEmpty()) {
-            userPhoneNum.error = "Field ini kosong"
+            userPhoneNum.error = "field cannot be empty"
         } else if (store.isEmpty()) {
-            userStore.error = "Field ini kosong"
+            userStore.error = "field cannot be empty"
         } else if (alamat.isEmpty()) {
-            userAddress.error = "Field ini kosong"
+            userAddress.error = "field cannot be empty"
         } else if (date.isEmpty()) {
-            userDOF.error = "Field ini kosong"
+            userDOF.error = "field cannot be empty"
         } else {
             updateUser(username, alamat, store, email, date, phone)
         }
@@ -157,13 +145,6 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
         date: String,
         phone: String
     ) {
-//        val user = User()
-//        user.username = username
-//        user.address = alamat
-//        user.store = store
-//        user.date = date
-//        user.email = email
-//        user.phone = phone
 
         val dataUser = hashMapOf<String, Any>(
             "address" to alamat,
@@ -176,7 +157,7 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
 
         databaseReference.child(preference.getValue("username").toString()).updateChildren(dataUser)
             .addOnCompleteListener {
-                Toast.makeText(this, "Update data Success", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Update data success", Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -197,11 +178,8 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
                     month,
                     day
                 )
-
                 dpd.show()
             }
-
-//            R.id.btn_update-> {
             R.id.btn_update -> {
                 updateData()
             }
@@ -233,7 +211,7 @@ class SettingProfileActivity : AppCompatActivity(), View.OnClickListener {
                     )
                     databaseReference.updateChildren(hashMap)
 
-                    Toast.makeText(this, "Profile Updated", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Profile picture updated", Toast.LENGTH_SHORT).show()
                 }
             }
 
