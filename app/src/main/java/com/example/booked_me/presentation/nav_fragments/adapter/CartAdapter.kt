@@ -21,8 +21,8 @@ class CartAdapter(private val listCart : List<Transaksi>) : RecyclerView.Adapter
                 tvHarga.text = "Rp. ${transaksi.harga}"
 
                 Picasso.get()
-                    .load(transaksi.gambar)
-                    .into(imgBookCover)
+                        .load(transaksi.gambar)
+                        .into(imgBookCover)
 
                 addSum.setOnClickListener {
                     var count = sumBook.text.toString().trim()

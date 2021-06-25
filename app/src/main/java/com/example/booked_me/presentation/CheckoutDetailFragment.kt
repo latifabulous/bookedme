@@ -32,8 +32,8 @@ class CheckoutDetailFragment : Fragment() {
     private var subBayar : String? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentCheckoutDetailBinding.inflate(inflater, container, false)
@@ -56,50 +56,50 @@ class CheckoutDetailFragment : Fragment() {
 
     private fun showData() {
         databaseReference.child(preference.getValue("username").toString())
-            .child("cart_user").addValueEventListener( object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    listOrder.clear()
-                    val orderDetail = snapshot.getValue(Transaksi::class.java)
-                    for (orders in snapshot.children){
-                        val order = orders.getValue(Transaksi::class.java)
-                        listOrder.add(order!!)
+                .child("cart_user").addValueEventListener( object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        listOrder.clear()
+                        val orderDetail = snapshot.getValue(Transaksi::class.java)
+                        for (orders in snapshot.children){
+                            val order = orders.getValue(Transaksi::class.java)
+                            listOrder.add(order!!)
 
-                        val simpleDateFormat = SimpleDateFormat("dd-MM-YYYY HH.MM")
-                        val currentDate = simpleDateFormat.format(Date())
+                            val simpleDateFormat = SimpleDateFormat("dd-MM-YYYY HH.MM")
+                            val currentDate = simpleDateFormat.format(Date())
 
-                        var orderData = Order()
-                        orderData.gambar = order.gambar
-                        orderData.harga = order.harga
-                        orderData.judul_buku = order.judul_buku
-                        orderData.date = currentDate.toString()
-                        orderData.status = "Belum Bayar"
+                            var orderData = Order()
+                            orderData.gambar = order.gambar
+                            orderData.harga = order.harga
+                            orderData.judul_buku = order.judul_buku
+                            orderData.date = currentDate.toString()
+                            orderData.status = "Belum Bayar"
 
-                        binding.btnOrder.setOnClickListener {
-                            databaseReference.child(preference.getValue("username").toString())
-                                .child("order_buku").setValue(orderData).addOnSuccessListener {
-                                    Toast.makeText(view?.context, "Add to Order", Toast.LENGTH_SHORT).show()
-                                }
+                            binding.btnOrder.setOnClickListener {
+                                databaseReference.child(preference.getValue("username").toString())
+                                        .child("order_buku").setValue(orderData).addOnSuccessListener {
+                                            Toast.makeText(view?.context, "Add to Order", Toast.LENGTH_SHORT).show()
+                                        }
 
 
+                            }
+
+                            binding.tvUsername.text = order.user
+                            binding.tvUserTlp.text = order.phone
+                            binding.tvAddress.text = order.alamat_user
+                            binding.tvAdminFee.text = "Rp. 2000"
+                            binding.tvUserTotalPrice.text = "Rp. $subBayar"
+                            binding.tvUserTotalPay.text = "Rp. $totalBayar"
                         }
+                        binding.rvOrder.adapter = OrderAdapter(listOrder)
 
-                        binding.tvUsername.text = order.user
-                        binding.tvUserTlp.text = order.phone
-                        binding.tvAddress.text = order.alamat_user
-                        binding.tvAdminFee.text = "Rp. 2000"
-                        binding.tvUserTotalPrice.text = "Rp. $subBayar"
-                        binding.tvUserTotalPay.text = "Rp. $totalBayar"
+
                     }
-                    binding.rvOrder.adapter = OrderAdapter(listOrder)
 
+                    override fun onCancelled(error: DatabaseError) {
+                        Log.e("CheckoutDetailFragment", error.message)
+                    }
 
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    Log.e("CheckoutDetailFragment", error.message)
-                }
-
-            })
+                })
 
     }
 }

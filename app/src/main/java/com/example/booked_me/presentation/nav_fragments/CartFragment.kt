@@ -50,8 +50,8 @@ class CartFragment : Fragment() {
     private var totalBayar : Int = 0
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_cart, container, false)
@@ -88,18 +88,18 @@ class CartFragment : Fragment() {
         rvCart.layoutManager = LinearLayoutManager(view.context)
         gestureLayout.viewTreeObserver.also {
             it.addOnGlobalLayoutListener(
-                object : ViewTreeObserver.OnGlobalLayoutListener {
-                    override fun onGlobalLayout() {
-                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                            gestureLayout.viewTreeObserver.removeGlobalOnLayoutListener(this)
-                        } else {
-                            gestureLayout.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    object : ViewTreeObserver.OnGlobalLayoutListener {
+                        override fun onGlobalLayout() {
+                            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                                gestureLayout.viewTreeObserver.removeGlobalOnLayoutListener(this)
+                            } else {
+                                gestureLayout.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                            }
+                            //                int width = bottomSheetLayout.getMeasuredWidth();
+                            val height = gestureLayout.measuredHeight
+                            sheetBehavior.peekHeight = height
                         }
-                        //                int width = bottomSheetLayout.getMeasuredWidth();
-                        val height = gestureLayout.measuredHeight
-                        sheetBehavior.peekHeight = height
-                    }
-                })
+                    })
         }
 
         sheetBehavior.isHideable = false
@@ -134,59 +134,59 @@ class CartFragment : Fragment() {
 
     private fun getDataCart() {
         database.child(preference.getValue("username").toString()).child("cart_user")
-            .addValueEventListener( object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    listCart.clear()
-                    for (carts in snapshot.children){
-                        val cart = carts.getValue(Transaksi::class.java)
-                        listCart.add(cart!!)
+                .addValueEventListener( object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        listCart.clear()
+                        for (carts in snapshot.children){
+                            val cart = carts.getValue(Transaksi::class.java)
+                            listCart.add(cart!!)
 
-                        totalBayar += cart.harga?.toInt()!!
+                            totalBayar += cart.harga?.toInt()!!
+                        }
+
+                        val adminFee = 2000
+                        var price : Int = adminFee + totalBayar
+
+
+                        subHarga.text = "Rp. $totalBayar"
+                        subOder.text = "Rp. $adminFee"
+                        totalHarga.text = "Rp. $price"
+                        harga.text = "Rp. $price"
+
+                        rvCart.adapter = CartAdapter(listCart)
+
+
+
+                        btnCheckout.setOnClickListener {
+                            val checkoutFragment = CheckoutDetailFragment()
+
+                            val bundle = Bundle()
+                            bundle.putString("EXTRA_PRICE", price.toString())
+                            bundle.putString("EXTRA_SUB_PRICE", totalBayar.toString())
+                            Log.d("CartFragment", totalBayar.toString())
+                            checkoutFragment.arguments = bundle
+
+                            fragmentManager?.beginTransaction()
+                                    ?.replace(R.id.fl_wrapper, checkoutFragment, CheckoutDetailFragment::class.java.simpleName)
+                                    ?.commit()
+                        }
+                        btnCheckoutSwipe.setOnClickListener {
+                            val checkoutFragment = CheckoutDetailFragment()
+                            val bundle = Bundle()
+                            bundle.putString("EXTRA_PRICE", price.toString())
+                            bundle.putString("EXTRA_SUB_PRICE", totalBayar.toString())
+                            checkoutFragment.arguments = bundle
+
+                            fragmentManager?.beginTransaction()
+                                    ?.replace(R.id.fl_wrapper, checkoutFragment, CheckoutDetailFragment::class.java.simpleName)
+                                    ?.commit()
+                        }
                     }
 
-                    val adminFee = 2000
-                    var price : Int = adminFee + totalBayar
-
-
-                    subHarga.text = "Rp. $totalBayar"
-                    subOder.text = "Rp. $adminFee"
-                    totalHarga.text = "Rp. $price"
-                    harga.text = "Rp. $price"
-
-                    rvCart.adapter = CartAdapter(listCart)
-
-
-
-                    btnCheckout.setOnClickListener {
-                        val checkoutFragment = CheckoutDetailFragment()
-
-                        val bundle = Bundle()
-                        bundle.putString("EXTRA_PRICE", price.toString())
-                        bundle.putString("EXTRA_SUB_PRICE", totalBayar.toString())
-                        Log.d("CartFragment", totalBayar.toString())
-                        checkoutFragment.arguments = bundle
-
-                        fragmentManager?.beginTransaction()
-                            ?.replace(R.id.fl_wrapper, checkoutFragment, CheckoutDetailFragment::class.java.simpleName)
-                            ?.commit()
+                    override fun onCancelled(error: DatabaseError) {
+                        Log.e("CartFragment", error.message)
                     }
-                    btnCheckoutSwipe.setOnClickListener {
-                        val checkoutFragment = CheckoutDetailFragment()
-                        val bundle = Bundle()
-                        bundle.putString("EXTRA_PRICE", price.toString())
-                        bundle.putString("EXTRA_SUB_PRICE", totalBayar.toString())
-                        checkoutFragment.arguments = bundle
-
-                        fragmentManager?.beginTransaction()
-                            ?.replace(R.id.fl_wrapper, checkoutFragment, CheckoutDetailFragment::class.java.simpleName)
-                            ?.commit()
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    Log.e("CartFragment", error.message)
-                }
-            })
+                })
     }
 
     private fun deleteBookmark() {

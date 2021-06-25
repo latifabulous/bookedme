@@ -42,8 +42,8 @@ class BookmarkFragment : Fragment(), View.OnClickListener {
     private lateinit var listBuku : ArrayList<Book>
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_bookmark, container, false)
@@ -78,22 +78,22 @@ class BookmarkFragment : Fragment(), View.OnClickListener {
 
     private fun getBookmark() {
         database.child(preference.getValue("username").toString()).child("data_bookmark")
-            .addValueEventListener( object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    listBuku.clear()
-                    for (books in snapshot.children){
-                        val book = books.getValue(Book::class.java)
-                        listBuku.add(book!!)
+                .addValueEventListener( object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        listBuku.clear()
+                        for (books in snapshot.children){
+                            val book = books.getValue(Book::class.java)
+                            listBuku.add(book!!)
+                        }
+
+                        rvBookmark.adapter = BookmarkAdapter(listBuku)
                     }
 
-                    rvBookmark.adapter = BookmarkAdapter(listBuku)
-                }
+                    override fun onCancelled(error: DatabaseError) {
+                        Log.e("BookmarkFragment", error.message)
+                    }
 
-                override fun onCancelled(error: DatabaseError) {
-                    Log.e("BookmarkFragment", error.message)
-                }
-
-            })
+                })
     }
 
     private fun deleteBookmark() {
@@ -116,55 +116,55 @@ class BookmarkFragment : Fragment(), View.OnClickListener {
             }
             R.id.btn_add_cart -> {
                 database.child(preference.getValue("username").toString()).addValueEventListener(
-                    object : ValueEventListener {
-                        override fun onDataChange(snapshot: DataSnapshot) {
-                            val user = snapshot.getValue(User::class.java)
+                        object : ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                val user = snapshot.getValue(User::class.java)
 
-                            database.child(preference.getValue("username").toString()).child("data_bookmark")
-                                .addValueEventListener( object : ValueEventListener {
-                                    override fun onDataChange(snapshot: DataSnapshot) {
-                                        for (buku in snapshot.children){
-                                            var book = buku.getValue(Book::class.java)
+                                database.child(preference.getValue("username").toString()).child("data_bookmark")
+                                        .addValueEventListener( object : ValueEventListener {
+                                            override fun onDataChange(snapshot: DataSnapshot) {
+                                                for (buku in snapshot.children){
+                                                    var book = buku.getValue(Book::class.java)
 
-                                            val simpleDateFormat = SimpleDateFormat("dd-MM-YYYY HH:MM:SS")
-                                            val currentDate = simpleDateFormat.format(Date())
+                                                    val simpleDateFormat = SimpleDateFormat("dd-MM-YYYY HH:MM:SS")
+                                                    val currentDate = simpleDateFormat.format(Date())
 
-                                            val transaksi = Transaksi()
-                                            transaksi.user = user?.username
-                                            transaksi.alamat_user = user?.address
-                                            transaksi.phone = user?.phone
-                                            transaksi.harga = book?.harga
-                                            transaksi.judul_buku = book?.judul
-                                            transaksi.date = currentDate.toString()
-                                            transaksi.gambar = book?.gambar
+                                                    val transaksi = Transaksi()
+                                                    transaksi.user = user?.username
+                                                    transaksi.alamat_user = user?.address
+                                                    transaksi.phone = user?.phone
+                                                    transaksi.harga = book?.harga
+                                                    transaksi.judul_buku = book?.judul
+                                                    transaksi.date = currentDate.toString()
+                                                    transaksi.gambar = book?.gambar
 
-                                            database.child(preference.getValue("username").toString())
-                                                .child("cart_user").child(book?.judul.toString()).setValue(transaksi)
-                                                .addOnSuccessListener {
-                                                   Snackbar.make(view!!, "Add to cart Success", Snackbar.LENGTH_SHORT).show()
-                                                }
+                                                    database.child(preference.getValue("username").toString())
+                                                            .child("cart_user").child(book?.judul.toString()).setValue(transaksi)
+                                                            .addOnSuccessListener {
+                                                                Snackbar.make(view!!, "Add to cart Success", Snackbar.LENGTH_SHORT).show()
+                                                            }
 
 ////                                            transaksi.status = "Belum Bayar"
 //
 //                                            database.child(preference.getValue("username").toString())
 //                                                .child("cart_user").child(book?.judul.toString()).setValue(transaksi)
 
-                                        }
-                                    }
+                                                }
+                                            }
 
-                                    override fun onCancelled(error: DatabaseError) {
-                                        Log.e("BookmarkFragment", error.message)
-                                    }
+                                            override fun onCancelled(error: DatabaseError) {
+                                                Log.e("BookmarkFragment", error.message)
+                                            }
 
-                                })
+                                        })
+
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+                                Log.e("BookmarkFragment", error.message)
+                            }
 
                         }
-
-                        override fun onCancelled(error: DatabaseError) {
-                            Log.e("BookmarkFragment", error.message)
-                        }
-
-                    }
                 )
             }
         }
