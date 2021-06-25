@@ -15,7 +15,7 @@ class OrderAdapter(private val listOrder : List<Transaksi>)
         private var binding = ListOrderBinding.bind(itemView)
 
         fun bind(transaksi: Transaksi){
-            binding.tvBookAuthor.text = "transaksi.judul_buku"
+            binding.tvBookAuthor.text = transaksi.judul_buku
             binding.tvBookPrice.text = transaksi.harga
             Picasso.get()
                 .load(transaksi.gambar)
@@ -24,7 +24,7 @@ class OrderAdapter(private val listOrder : List<Transaksi>)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_cart, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_order, parent, false)
         return OrderViewHolder(view)
     }
 

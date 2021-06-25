@@ -1,5 +1,7 @@
 package com.example.booked_me.presentation.nav_fragments
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +21,7 @@ import com.example.booked_me.data.Transaksi
 import com.example.booked_me.data.User
 import com.example.booked_me.presentation.nav_fragments.adapter.BookmarkAdapter
 import com.example.booked_me.utils.Preference
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.*
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
@@ -31,6 +34,7 @@ class BookmarkFragment : Fragment(), View.OnClickListener {
     private lateinit var btnBack : Button
     private lateinit var rvBookmark : RecyclerView
     private lateinit var btnAddCart : Button
+    private lateinit var btnDelete : Button
 
     private lateinit var database : DatabaseReference
     private lateinit var preference: Preference
@@ -53,9 +57,11 @@ class BookmarkFragment : Fragment(), View.OnClickListener {
 
         rvBookmark = view.findViewById(R.id.rv_bookmark)
         btnBack = view.findViewById(R.id.btn_back)
+        btnDelete = view.findViewById(R.id.btn_delete)
         btnAddCart = view.findViewById(R.id.btn_add_cart)
         btnBack.setOnClickListener(this)
         btnAddCart.setOnClickListener(this)
+        btnDelete.setOnClickListener(this)
         listBuku = ArrayList<Book>()
 
 //        listBuku.clear()
@@ -64,6 +70,7 @@ class BookmarkFragment : Fragment(), View.OnClickListener {
 //        }
 
         getBookmark()
+
 
         rvBookmark.layoutManager = LinearLayoutManager(view.context)
         rvBookmark.setHasFixedSize(true)
@@ -89,10 +96,23 @@ class BookmarkFragment : Fragment(), View.OnClickListener {
             })
     }
 
+    private fun deleteBookmark() {
+        val alertDialog = AlertDialog.Builder(view?.context)
+        alertDialog.setTitle("Are you sure to delete this?")
+        alertDialog.setPositiveButton("Yes") { dialog, which ->
+            database.child(preference.getValue("username").toString())
+                    .child("data_bookmark").removeValue()
+        }
+        alertDialog.setNegativeButton("No") { dialog, which ->
+            dialog.dismiss()
+        }
+        alertDialog.create().show()
+    }
+
     override fun onClick(v: View?) {
         when(v?.id) {
-            R.id.btn_back -> {
-
+            R.id.btn_delete -> {
+                deleteBookmark()
             }
             R.id.btn_add_cart -> {
                 database.child(preference.getValue("username").toString()).addValueEventListener(
@@ -121,7 +141,7 @@ class BookmarkFragment : Fragment(), View.OnClickListener {
                                             database.child(preference.getValue("username").toString())
                                                 .child("cart_user").child(book?.judul.toString()).setValue(transaksi)
                                                 .addOnSuccessListener {
-                                                    Toast.makeText(view?.context, "Add to Cart to Success", Toast.LENGTH_SHORT).show()
+                                                   Snackbar.make(view!!, "Add to cart Success", Snackbar.LENGTH_SHORT).show()
                                                 }
 
 ////                                            transaksi.status = "Belum Bayar"

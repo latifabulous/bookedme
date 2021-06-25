@@ -1,5 +1,6 @@
 package com.example.booked_me.presentation.nav_fragments
 
+import android.app.AlertDialog
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -38,6 +39,7 @@ class CartFragment : Fragment() {
 
     private lateinit var btnCheckout : Button
     private lateinit var btnCheckoutSwipe : Button
+    private lateinit var btnDelete : Button
 
     private lateinit var rvCart : RecyclerView
 
@@ -45,6 +47,7 @@ class CartFragment : Fragment() {
     private lateinit var preference: Preference
 
     private lateinit var listCart : ArrayList<Transaksi>
+    private var totalBayar : Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,6 +69,7 @@ class CartFragment : Fragment() {
         harga = view.findViewById(R.id.harga)
         totalHarga = view.findViewById(R.id.total_harga)
         subOder = view.findViewById(R.id.sub_order)
+        btnDelete = view.findViewById(R.id.btn_delete)
 
         bottomSheet = view.findViewById(R.id.bottom_sheet)
         gestureLayout = view.findViewById(R.id.gesture_layout)
@@ -75,6 +79,10 @@ class CartFragment : Fragment() {
         btnCheckout = view.findViewById(R.id.btn_checkout)
         btnCheckoutSwipe = view.findViewById(R.id.btn_checkout_swipe)
         rvCart = view.findViewById(R.id.rv_cart)
+
+        btnDelete.setOnClickListener{
+            deleteBookmark()
+        }
 
         getDataCart()
         rvCart.layoutManager = LinearLayoutManager(view.context)
@@ -129,7 +137,6 @@ class CartFragment : Fragment() {
             .addValueEventListener( object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     listCart.clear()
-                    var totalBayar : Int = 0
                     for (carts in snapshot.children){
                         val cart = carts.getValue(Transaksi::class.java)
                         listCart.add(cart!!)
@@ -145,13 +152,18 @@ class CartFragment : Fragment() {
                     subOder.text = "Rp. $adminFee"
                     totalHarga.text = "Rp. $price"
                     harga.text = "Rp. $price"
+
                     rvCart.adapter = CartAdapter(listCart)
+
+
 
                     btnCheckout.setOnClickListener {
                         val checkoutFragment = CheckoutDetailFragment()
+
                         val bundle = Bundle()
                         bundle.putString("EXTRA_PRICE", price.toString())
                         bundle.putString("EXTRA_SUB_PRICE", totalBayar.toString())
+                        Log.d("CartFragment", totalBayar.toString())
                         checkoutFragment.arguments = bundle
 
                         fragmentManager?.beginTransaction()
@@ -162,6 +174,7 @@ class CartFragment : Fragment() {
                         val checkoutFragment = CheckoutDetailFragment()
                         val bundle = Bundle()
                         bundle.putString("EXTRA_PRICE", price.toString())
+                        bundle.putString("EXTRA_SUB_PRICE", totalBayar.toString())
                         checkoutFragment.arguments = bundle
 
                         fragmentManager?.beginTransaction()
@@ -173,7 +186,19 @@ class CartFragment : Fragment() {
                 override fun onCancelled(error: DatabaseError) {
                     Log.e("CartFragment", error.message)
                 }
-
             })
+    }
+
+    private fun deleteBookmark() {
+        val alertDialog = AlertDialog.Builder(view?.context)
+        alertDialog.setTitle("Are you sure to delete this?")
+        alertDialog.setPositiveButton("Yes") { dialog, which ->
+            database.child(preference.getValue("username").toString())
+                    .child("cart_user").removeValue()
+        }
+        alertDialog.setNegativeButton("No") { dialog, which ->
+            dialog.dismiss()
+        }
+        alertDialog.create().show()
     }
 }

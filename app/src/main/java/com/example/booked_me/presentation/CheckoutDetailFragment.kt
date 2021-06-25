@@ -49,7 +49,6 @@ class CheckoutDetailFragment : Fragment() {
         totalBayar = arguments?.getString("EXTRA_PRICE")
         subBayar = arguments?.getString("EXTRA_SUB_PRICE")
 
-
         binding.rvOrder.layoutManager = LinearLayoutManager(view.context)
         showData()
 
@@ -60,7 +59,7 @@ class CheckoutDetailFragment : Fragment() {
             .child("cart_user").addValueEventListener( object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     listOrder.clear()
-                    var orderDetail = snapshot.getValue(Transaksi::class.java)
+                    val orderDetail = snapshot.getValue(Transaksi::class.java)
                     for (orders in snapshot.children){
                         val order = orders.getValue(Transaksi::class.java)
                         listOrder.add(order!!)
@@ -84,15 +83,15 @@ class CheckoutDetailFragment : Fragment() {
 
                         }
 
+                        binding.tvUsername.text = order.user
+                        binding.tvUserTlp.text = order.phone
+                        binding.tvAddress.text = order.alamat_user
+                        binding.tvAdminFee.text = "Rp. 2000"
+                        binding.tvUserTotalPrice.text = "Rp. $subBayar"
+                        binding.tvUserTotalPay.text = "Rp. $totalBayar"
                     }
                     binding.rvOrder.adapter = OrderAdapter(listOrder)
 
-                    binding.tvUsername.text = orderDetail?.user
-                    binding.tvUserTlp.text = orderDetail?.phone
-                    binding.tvAddress.text = orderDetail?.alamat_user
-                    binding.tvAdminFee.text = "Rp. 2000"
-                    binding.tvUserTotalPrice.text = "Rp. $subBayar"
-                    binding.tvUserTotalPay.text = "Rp. $totalBayar"
 
                 }
 
